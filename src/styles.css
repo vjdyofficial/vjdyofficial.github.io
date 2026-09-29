@@ -120,8 +120,7 @@ dialog {
   
   video {
     width: 100%;
-    height: 100%;
-    aspect-ratio: 16 / 9;
+    height: 80vh;
   }
 
   max-width: 640px;
@@ -131,8 +130,8 @@ dialog {
 }
 
 .videodialog {
-  width: 80vw;
-  max-width: 80vw;
+  width: 100%;
+  max-width: 95vw;
 }
 
 
@@ -142,6 +141,11 @@ dialog::backdrop {
   backdrop-filter: blur(24px);
 }
 
+.title_portfolio {
+  color: var(--accentcolor-1);
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
 
 @keyframes scaleUp {
   from {
@@ -304,6 +308,18 @@ main {
   margin-bottom: 4px;
 }
 
+section {
+  padding: 12px;
+  
+  p {
+    text-align: left;
+  }
+
+  h2, h3, h4, h5, h6 {
+    margin-top: 24px;
+  }
+}
+
 .portfolio {
   border: 1.5px solid var(--strokecolor);
   width: 100%;
@@ -335,6 +351,44 @@ main {
   }
 }
 
+.portfolio_explore {
+  border: 1.5px solid var(--strokecolor);
+  width: 100%;
+  margin-bottom: 4px;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  .info_main {
+    display: flex;
+    padding: 12px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    border: 1.5px solid var(--strokecolor);
+
+    img {
+      padding: 8px;
+      --width: 30%;
+      width: var(--width, 100px);
+      min-width: var(--width, 100px);
+      aspect-ratio: 1 / 1;
+    }
+
+    .info_sub {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      small {
+        text-align: left;
+      }
+    }
+  }
+}
+
 @media (min-width: 768px) {
   .MNS_AREA_2 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -342,6 +396,10 @@ main {
 
   .portfolio {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .portfolio_explore {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   :root {
@@ -359,6 +417,10 @@ main {
 @media (min-width: 1440px) {
   .MNS_AREA_2 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .portfolio_explore {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .portfolio {
