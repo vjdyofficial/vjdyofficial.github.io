@@ -1,0 +1,22 @@
+[
+  {
+    "image": "images/banner1.jpg",
+    "title": "My First Selfie with Kim!",
+    "description": "First met, first serve!"
+  },
+  {
+    "image": "images/banner2.jpg",
+    "title": "Kim's Montage",
+    "description": "Looking at the window. staring down."
+  },
+  {
+    "image": "images/banner3.jpg",
+    "title": "Kim's Montage 2",
+    "description": "Looking at the window. staring down."
+  },
+  {
+    "image": "images/banner4.jpeg",
+    "title": "EMC Expo 2026 Selfie",
+    "description": "Good time!"
+  }
+]
