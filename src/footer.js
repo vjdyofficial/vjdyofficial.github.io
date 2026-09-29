@@ -1,5 +1,5 @@
 let html = `
-<img alt="Logo" src="./assets/logo/brand.svg" height="32px" />
+<img alt="Logo" src="./assets/logo/brand.svg" height="40px" />
       <div class info_main>
         <div class="info_sub">
           <small><span>Make things possible.</span></small>

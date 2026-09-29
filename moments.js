@@ -1,5 +1,5 @@
 async function API_MOMENT_GET() {
-  const items = await fetch("./api/moments/data.json").then((res) => res.json());
+  const items = await fetch("./moments.json").then((res) => res.json());
   const parent = document.getElementById("moments_parent");
 
   items.forEach((item) => {
