@@ -13,17 +13,20 @@ body {
   background-color: #141414;
   color: white;
   font-family: var(--fontset-standard);
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 header {
   border: 1px solid var(--strokecolor);
-  box-sizing: border-box;
   width: 100%;
+  margin-bottom: 4px;
 
   .MNS_AREA_1 {
     width: 100%;
     display: flex;
-    box-sizing: border-box;
     flex-direction: column;
     padding: 12px;
     border: 1px solid var(--strokecolor);
@@ -32,7 +35,7 @@ header {
       font-family: var(--fontset-mono);
       line-height: 1em;
       margin: 0;
-      font-size: 15vw;
+      font-size: 8vw;
     }
   }
 
@@ -41,17 +44,66 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .MNS_AREA_TICKERTEXT {
+    width: 100%;
+    border: 1px solid var(--strokecolor);
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    p {
+        padding: 0;
+        margin: 0;
+        font-size: 4vw;
+
+        animation: infinite scroll-text 20s linear;
+    }
+  }
+}
+
+nav {
+    position: sticky;
+    top: 8px;
+    background-color: #141414;
+    border: 2px solid var(--strokecolor);
+    width: 100%;
+    margin-bottom: 4px;
+    padding: 16px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main {
+    border: 1px solid var(--strokecolor);
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+footer {
+    border: 1px solid var(--strokecolor);
+    width: 100%;
+}
+
+@keyframes scroll-text {
+    from {
+        transform: translateX(100%);
+    } to {
+        transform: translateX(-100%);
+    }
 }
 
 [data-ratio="1"] {
-  box-sizing: border-box;
   width: 100%;
   border: 1px solid var(--strokecolor);
   aspect-ratio: 1 / 1;
 }
 
 [data-ratio="2"] {
-  box-sizing: border-box;
   width: 100%;
   border: 1px solid var(--strokecolor);
   aspect-ratio: 2 / 1;
