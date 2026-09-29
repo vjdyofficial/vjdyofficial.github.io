@@ -53,11 +53,12 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    padding: 2vw;
 
     p {
         padding: 0;
         margin: 0;
-        font-size: 4vw;
+        font-size: 3vw;
 
         animation: infinite scroll-text 20s linear;
     }
@@ -91,9 +92,9 @@ footer {
 
 @keyframes scroll-text {
     from {
-        transform: translateX(100%);
+        transform: translateX(120%);
     } to {
-        transform: translateX(-100%);
+        transform: translateX(-120%);
     }
 }
 
