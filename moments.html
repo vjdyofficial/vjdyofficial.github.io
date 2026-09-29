@@ -11,11 +11,17 @@
 
   <body>
     <nav>
-      <a href="./index.html" class="back-button">
+      <button type="button" class="back-button" onclick="history.length > 1 ? history.back() : window.location.href = window.location.origin">
         <img src="./assets/icons/arrow_back.svg" class="tint" alt="Instagram" />
         <span>Navigate Up</span>
-      </a>
-      <img alt="Logo" src="./assets/logo/brand.svg" height="32px" />
+      </button>
+      <img
+        alt="Logo"
+        src="./assets/logo/brand.svg"
+        height="32px"
+        style="cursor: pointer; -webkit-user-drag: auto;"
+        onclick="window.location.href = window.location.origin;"
+      />
     </nav>
     <header>
       <div class="MNS_AREA_1">

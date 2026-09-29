@@ -1,5 +1,30 @@
 [
   {
+    "image": "images/kaye1.jpg",
+    "title": "First Selfie with Kaye",
+    "description": "Since May 2023 <br><code>with Kaye Collada-Batanes</code>"
+  },
+  {
+    "image": "images/kaye2.jpg",
+    "title": "Second Selfie with Kaye",
+    "description": "Since January 2024 <br><code>with Kaye Collada-Batanes</code>"
+  },
+  {
+    "image": "images/kaye3.jpg",
+    "title": "Collada la Tropical",
+    "description": "Since June 2025 <br><code>with Kaye Collada-Batanes</code>"
+  },
+  {
+    "image": "images/kaye4.jpg",
+    "title": "November Selfie",
+    "description": "Since November 2025 <br><code>with Kaye Collada-Batanes</code>"
+  },
+  {
+    "image": "images/bsemcdat.png",
+    "title": "BSEMC-DAT New Friends",
+    "description": "First met, first serve at BISCAST as BSEMC Student in Digital Animation Technology!"
+  },
+  {
     "image": "images/banner1.jpg",
     "title": "My First Selfie with Kim!",
     "description": "First met, first serve!"

@@ -58,7 +58,7 @@ body {
 }
 
 header {
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   width: 100%;
   max-width: var(--limit);
   margin-bottom: 4px;
@@ -94,6 +94,34 @@ img {
   -webkit-user-drag: none;
 }
 
+dialog {
+  appearance: none;
+  background-color: var(--background);
+  border: 1.5px solid var(--text);
+  color: var(--text);
+  user-select: none;
+
+  max-width: 640px;
+  box-shadow: 4px 4px 0px var(--text);
+
+  animation: scaleUp 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 50%);
+  pointer-events: painted;
+  backdrop-filter: blur(24px);
+}
+
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+  } to {
+    transform: scale(1);
+  }
+}
+
 .MNS_AREA_1 {
   width: 100%;
   display: flex;
@@ -103,7 +131,7 @@ img {
   background-repeat: no-repeat;
   background-size: cover;
   padding: 24px;
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
 
   h1 {
     font-family: var(--fontset-mono);
@@ -124,6 +152,9 @@ img {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  padding: 8px;
+  gap: 8px;
 }
 
 @media (min-width: 320px) {
@@ -146,7 +177,7 @@ img {
 
 .MNS_AREA_TICKERTEXT {
   width: 100%;
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   overflow: hidden;
   white-space: nowrap;
   display: flex;
@@ -189,8 +220,27 @@ button {
   font-family: var(--fontset-mono);
 }
 
+.back-button {
+  position: relative;
+  margin-top: 0px;
+  border: 1.5px solid var(--text);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text);
+  padding: 8px 8px;
+  cursor: pointer;
+  font-family: var(--fontset-mono);
+}
+
 button:active {
   color: var(--background) !important;
+
+  .tint {
+    filter: invert(0.5) brightness(0);
+  }
 }
 
 button::after {
@@ -211,14 +261,14 @@ button:active::after {
 }
 
 main {
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   width: 100%;
   max-width: var(--limit);
   margin-bottom: 4px;
 }
 
 .portfolio {
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   width: 100%;
   margin-bottom: 4px;
   display: grid;
@@ -232,7 +282,7 @@ main {
     justify-content: flex-start;
     gap: 8px;
     width: 100%;
-    border: 1px solid var(--strokecolor);
+    border: 1.5px solid var(--strokecolor);
 
     .info_sub {
       width: 100%;
@@ -301,7 +351,7 @@ footer {
     justify-content: center;
     gap: 8px;
     width: 100%;
-    border: 1px solid var(--strokecolor);
+    border: 1.5px solid var(--strokecolor);
 
     .info_sub {
       width: 100%;
@@ -328,18 +378,18 @@ footer {
 
 [data-ratio="1"] {
   width: 100%;
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   aspect-ratio: 1 / 1;
 }
 
 [data-ratio="2"] {
   width: 100%;
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   aspect-ratio: 2 / 1;
 }
 
 .moments_main {
-  border: 1px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
 
   .moments_image {
     aspect-ratio: 1 / 1;

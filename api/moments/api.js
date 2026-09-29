@@ -5,6 +5,28 @@ async function API_MOMENT_GET() {
   items.forEach((item) => {
     const moment = document.createElement("div");
     moment.className = "moments_main";
+    moment.addEventListener("click", () => {
+      const dialog = document.createElement("dialog");
+      const closeButton = document.createElement("button");
+      closeButton.type = "button";
+      closeButton.className = "back-button";
+      closeButton.style.marginBottom = "8px";
+      closeButton.innerHTML = `
+        <img src="./assets/icons/close.svg" class="tint" alt="Instagram" />
+        <span>Close</span>
+      `;
+      closeButton.setAttribute("aria-label", "Close");
+      closeButton.addEventListener("click", () => dialog.close());
+      dialog.appendChild(closeButton);
+
+      const content = moment.cloneNode(true);
+      content.addEventListener("click", (event) => event.stopPropagation());
+      dialog.appendChild(content);
+      document.body.appendChild(dialog);
+
+      dialog.addEventListener("close", () => dialog.remove(), { once: true });
+      dialog.showModal();
+    });
 
     const image = document.createElement("img");
     image.src = "./api/moments/" + item.image;
@@ -22,7 +44,7 @@ async function API_MOMENT_GET() {
 
     const description = document.createElement("small");
     description.id = "moments_desc";
-    description.textContent = item.description;
+    description.innerHTML = item.description;
     description.title = item.description;
     info.appendChild(description);
 
