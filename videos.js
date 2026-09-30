@@ -1,3 +1,21 @@
+function API_SEARCH(query) {
+  if (query === undefined) {
+    query = document.getElementById("SEARCH_BOX")?.value ?? "";
+  }
+
+  const table = document.getElementById("tablex");
+  const body = table?.tBodies[0];
+  if (!body) return;
+
+  const search = String(query ?? "").trim().toLocaleLowerCase();
+  Array.from(body.rows).forEach((row) => {
+    const title = row.cells[0]?.textContent ?? "";
+    row.style.display = title.toLocaleLowerCase().includes(search)
+      ? "table-row"
+      : "none";
+  });
+}
+
 const loadVideos = () => {
   const table = document.getElementById("tablex");
 
@@ -59,12 +77,23 @@ const loadVideos = () => {
       videos.forEach((video) => {
         const row = tableBody.insertRow();
 
-        [video.title, video.releasetag, video.date].forEach(
-          (value) => {
-            const cell = row.insertCell();
-            cell.textContent = value ?? "";
-          },
-        );
+        const cell = row.insertCell();
+
+        const icon = document.createElement("img");
+        icon.src = "./assets/icons/movie.svg";
+        icon.width = "18"
+        icon.className = "tint";
+        cell.append(icon);
+
+        const span = document.createElement("span");
+
+        [video.title, video.releasetag, video.date].forEach((value) => {
+          const text = document.createElement("p");
+          text.textContent = value ?? "";
+          span.append(text);
+        });
+
+        cell.append(span);
 
         const openVideo = () => {
           if (!video.file) return;

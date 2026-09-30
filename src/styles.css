@@ -1,8 +1,10 @@
 :root {
-  --strokecolor: #323232;
+  --strokecolor: #444444;
+  --strokecolor2: #333333;
   --background: #141414;
   --text: white;
   --footer-layout-direction: column;
+  --layout-gap: 0px;
   --accentcolor-1: #dfff93;
   --accentcolor-2: hsl(165, 100%, 79%);
   --limit: 1600px;
@@ -98,13 +100,52 @@ table {
   padding: 8px;
   width: 100%;
 
-  font-family: var(--fontset-mono-substitute);
+  font-family: var(--fontset-standard);
+  font-size: 14px;
 }
 
 th,
 td {
   padding: 8px;
   border: 1.5px solid var(--strokecolor);
+}
+
+td {
+  padding: 8px;
+  border: 1.5px solid var(--strokecolor);
+  display: flex !important;
+  flex-direction: row;
+
+  gap: 16px;
+
+  div {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  span {
+    width: 100%;
+    display: flex !important;
+    flex-direction: var(--footer-layout-direction) !important;
+    text-align: left;
+    align-items: flex-start;
+    gap: var(--layout-gap);
+
+    p {
+      width: 100%;
+      text-align: left;
+    }
+    p:nth-child(2),
+    p:nth-child(3) {
+      width: 250px;
+      font-size: 12px;
+      font-weight: bold;
+      opacity: 0.5;
+    }
+  }
 }
 
 tbody tr:hover {
@@ -117,7 +158,7 @@ dialog {
   border: 1.5px solid var(--text);
   color: var(--text);
   user-select: none;
-  
+
   video {
     width: 100%;
     height: 80vh;
@@ -134,7 +175,6 @@ dialog {
   max-width: 95vw;
 }
 
-
 dialog::backdrop {
   background-color: rgb(0 0 0 / 50%);
   pointer-events: painted;
@@ -150,7 +190,8 @@ dialog::backdrop {
 @keyframes scaleUp {
   from {
     transform: scale(0.8);
-  } to {
+  }
+  to {
     transform: scale(1);
   }
 }
@@ -178,7 +219,7 @@ dialog::backdrop {
     font-family: var(--fontset-mono);
     line-height: 1.2em;
     margin: 0;
-    font-size: clamp(0.5rem, 2vw, 2rem);
+    font-size: clamp(1rem, 2vw, 2rem);
     text-shadow: 2px 2px 0px #00000080;
   }
 }
@@ -189,29 +230,45 @@ dialog::backdrop {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-#moments_parent, #music_parent {
+#moments_parent {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-
+  height: 100%;
+  min-height: 100vh;
   padding: 8px;
   gap: 8px;
 }
 
+#music_parent {
+  height: 100%;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  #tablex {
+    max-width: 1280px;
+  }
+}
+
 @media (min-width: 320px) {
-  #moments_parent, #music_parent {
+  #moments_parent,
+  #music_parent {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 720px) {
-  #moments_parent, #music_parent {
+  #moments_parent,
+  #music_parent {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1280px) {
-  #moments_parent, #music_parent {
+  #moments_parent,
+  #music_parent {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
@@ -263,6 +320,7 @@ nav {
   margin-bottom: 4px;
   padding: 16px;
   z-index: 50;
+  gap: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -329,12 +387,16 @@ main {
 
 section {
   padding: 12px;
-  
+
   p {
     text-align: left;
   }
 
-  h2, h3, h4, h5, h6 {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-top: 24px;
   }
 }
@@ -423,15 +485,16 @@ section {
 
   :root {
     --footer-layout-direction: row;
+    --layout-gap: 8px;
   }
 }
 
 @media (min-width: 540px) {
   :root {
     --footer-layout-direction: row;
+    --layout-gap: 8px;
   }
 }
-
 
 @media (min-width: 1440px) {
   .MNS_AREA_2 {
@@ -458,7 +521,7 @@ footer {
   display: flex;
   flex-direction: var(--footer-layout-direction);
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--layout-gap);
   justify-content: space-between;
 
   .info_main {
@@ -624,7 +687,63 @@ footer {
   padding: 16px;
   z-index: 50;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 600px;
+
+  transition: max-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  span {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.player.at-bottom {
   max-width: var(--limit);
+}
+
+input[type="search"] {
+  position: relative;
+  width: 100%;
+  border: 1.5px solid var(--strokecolor);
+  background: transparent;
+  color: var(--text);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: var(--fontset-mono);
+}
+
+input[type="range"] {
+  appearance: none;
+  border: none;
+  border-radius: 0px;
+  height: 4px;
+
+  background: #363636;
+
+  /* Used to be background color, the track */
+  background-image: linear-gradient(#fff, #fff);
+
+  /* 30% is the difference between the max and the current value (100 - 70) */
+  background-size: 30% 100%;
+  background-repeat: no-repeat;
+
+  &::-webkit-scrollbar-track {
+    height: 2px;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--text);
+  }
 }

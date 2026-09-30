@@ -5,47 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/styles.css" />
     <link rel="stylesheet" href="./src/fonts.css" title="Fonts" />
-    <script src="./shopmusic.js"></script>
+    <script src="./shopmusic.js" defer></script>
     <title>VJDY Official Music Store</title>
   </head>
 
   <body>
     <audio id="music_player"></audio>
     <nav>
-      <button type="button" class="back-button" onclick="history.length > 1 ? history.back() : window.location.href = window.location.origin">
+      <button
+        type="button"
+        class="back-button"
+        onclick="
+          history.length > 1
+            ? history.back()
+            : (window.location.href = window.location.origin)
+        ">
         <img src="./assets/icons/arrow_back.svg" class="tint" alt="Instagram" />
-        <span>Navigate Up</span>
       </button>
       <img
         alt="Logo"
-        src="./assets/logo/officiallogo.svg"
+        src="./assets/logo/music.svg"
         height="32px"
-        style="cursor: pointer; -webkit-user-drag: auto;"
-        onclick="window.location.href = window.location.origin;"
-      />
+        style="cursor: pointer; -webkit-user-drag: auto"
+        onclick="window.location.href = window.location.origin" />
+      <input
+        id="MUSICSEARCH_BOX"
+        type="search"
+        placeholder="Search music title, artist, album, year or tag..."
+        oninput="API_MUSICSEARCH()" />
     </nav>
     <header>
       <div class="MNS_AREA_1">
-        <h1>
-          Music Store
-        </h1>
+        <h2>Open source AI-powered and own composition of music for all!</h2>
       </div>
     </header>
 
-    <main>
-      <div id="music_parent">
-      </div>
+    <main id="music_parent">
+      <table id="tablex"></table>
     </main>
 
     <main class="player">
-      <button id class="back-button">
-        <img src="./assets/icons/play_arrow.svg" class="tint" id="AUDIOPLAYER_ICON" alt="Instagram" />
-      </button>
-      <div>
-        <h3 id="AUDIOPLAYER_TITLE">No Title</h3>
-        <small id="AUDIOPLAYER_SUBTITLE">No Title</small>
-      </div>
-      <input type="range" min="0" max="100" id="AUDIOPLAYER_SLIDER" style="width: 25%;">
+      <span>
+        <button id="AUDIOPLAYER_PLAYBTN" class="back-button">
+          <img
+            src="./assets/icons/play_arrow.svg"
+            class="tint"
+            id="AUDIOPLAYER_ICON"
+            alt="Instagram" />
+        </button>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="0.001"
+          id="AUDIOPLAYER_SLIDER"
+          style="width: 100%" />
+      </span>
+      <span>
+        <div>
+          <h3 id="AUDIOPLAYER_TITLE">No Title</h3>
+          <small id="AUDIOPLAYER_SUB">No Title</small>
+        </div>
+        <button id="AUDIOPLAYER_DOWNLOAD" class="back-button">
+          <img
+            src="./assets/icons/download.svg"
+            class="tint"
+            id="AUDIOPLAYER_ICON"
+            alt="Instagram" />
+        </button>
+      </span>
     </main>
 
     <footer>

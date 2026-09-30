@@ -13,7 +13,6 @@
     <nav>
       <button type="button" class="back-button" onclick="history.length > 1 ? history.back() : window.location.href = window.location.origin">
         <img src="./assets/icons/arrow_back.svg" class="tint" alt="Instagram" />
-        <span>Navigate Up</span>
       </button>
       <img
         alt="Logo"
@@ -22,6 +21,11 @@
         style="cursor: pointer; -webkit-user-drag: auto;"
         onclick="window.location.href = window.location.origin;"
       />
+      <input
+        id="SEARCH_BOX"
+        type="search"
+        placeholder="Search videos by title, tag, and date..."
+        oninput="API_SEARCH()" />
     </nav>
     <header>
       <div class="MNS_AREA_1">
@@ -33,15 +37,8 @@
         </h2>
       </div>
     </header>
-    <main>
+    <main id="music_parent">
       <table id="tablex">
-        <thead>
-          <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Release Tag</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
       </table>
     </main>
 

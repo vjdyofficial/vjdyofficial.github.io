@@ -1,50 +1,44 @@
-var identifier = "vjdyofficialmusic-2025";
+window.identifier = "vjdyofficialmusic-2025";
+let fileformat = "";
 
-async function getArchiveMusic() {
-    const response = await fetch(
-        `https://archive.org/metadata/${identifier}`
-    );
+const AUDIOPLAYER_TITLE = document.getElementById("AUDIOPLAYER_TITLE");
+const AUDIOPLAYER_SUB = document.getElementById("AUDIOPLAYER_SUB");
 
-    if (!response.ok) {
-        throw new Error(`Internet Archive HTTP ${response.status}`);
-    }
+function API_MUSICSEARCH(query) {
+  if (query === undefined) {
+    query = document.getElementById("MUSICSEARCH_BOX")?.value ?? "";
+  }
 
-    const data = await response.json();
+  const table = document.getElementById("tablex");
+  const body = table?.tBodies[0];
+  if (!body) return;
 
-    return data.files
-        .filter(file => /\.(mp3|flac)$/i.test(file.name))
-        .map(file => ({
-            title: file.title || file.name.replace(/\.(mp3|flac)$/i, ""),
-            filename: file.name,
-            url: `https://archive.org/download/${identifier}/${file.name
-                .split("/")
-                .map(encodeURIComponent)
-                .join("/")}`,
-            artist: file.creator || file.artist || data.metadata?.creator || "",
-            album: file.album || ""
-        }));
+  const search = String(query ?? "").trim().toLocaleLowerCase();
+  Array.from(body.rows).forEach((row) => {
+    const title = row.cells[0]?.textContent ?? "";
+    row.style.display = title.toLocaleLowerCase().includes(search)
+      ? "table-row"
+      : "none";
+  });
 }
 
-async function API_MUSIC_GET() {
-  const identifier = "vjdyofficialmusic-2025";
+async function API_MUSIC_GET(id) {
+  const identifier = id;
 
-  const data = await fetch(
-    `https://archive.org/metadata/${identifier}`
-  ).then((res) => res.json());
-
-  const parent = document.getElementById("music_parent");
-  const audio = document.getElementById("music_player");
-
-  if (!parent || !audio) return;
-
-  const files = data.files.filter((file) =>
-    /\.(mp3|flac)$/i.test(file.name)
+  const data = await fetch(`https://archive.org/metadata/${identifier}`).then(
+    (res) => res.json(),
   );
 
-  files.forEach((file) => {
-    const card = document.createElement("div");
-    card.className = "music_main";
+  const table = document.getElementById("tablex");
+  const audio = document.getElementById("music_player");
 
+  if (!table || !audio) return;
+
+  const parent = table.tBodies[0] || table.createTBody();
+  const tag = identifier.replace("vjdyofficial", "").replace("music-", "")
+  const files = data.files.filter((file) => /\.(mp3|flac)$/i.test(file.name));
+
+  files.forEach((file) => {
     /*
      * File metadata
      */
@@ -55,79 +49,203 @@ async function API_MUSIC_GET() {
         .pop()
         .replace(/\.(mp3|flac)$/i, "");
 
-    const artist =
-      file.artist ||
-      file.creator ||
-      data.metadata?.creator ||
-      "";
+    const artist = file.artist || file.creator || data.metadata?.creator || "";
 
-    const album =
-      file.album ||
-      "";
+    const album = file.album || "";
 
-    const filename = file.name.split("/").pop();
+    const format = file.name.split(".").pop().toUpperCase();
 
     const url =
       `https://archive.org/download/${identifier}/` +
-      file.name
-        .split("/")
-        .map(encodeURIComponent)
-        .join("/");
+      file.name.split("/").map(encodeURIComponent).join("/");
 
-    /*
-     * Album art
-     *
-     * If the Archive item contains an image matching
-     * the audio file, use it.
-     */
+    const row = document.createElement("tr");
+    row.className = "music_main";
+    row.tabIndex = 0;
+    row.style.display = "table-row";
 
-    /*
-     * Information
-     */
-    const info = document.createElement("div");
-    info.className = "music_info";
+    const cell = document.createElement("td");
+    cell.colSpan = 3;
+    cell.style.display = "table-cell";
 
-    const titleElement = document.createElement("h2");
-    titleElement.className = "music_title";
-    titleElement.textContent = title;
-    titleElement.title = title;
+    const createLine = (icon, value, subtitle) => {
+      const line = document.createElement("div");
+      const main = document.createElement("span");
+      main.innerHTML = `${icon} ${value}`;
 
-    info.appendChild(titleElement);
+      const small = document.createElement("small");
+      small.textContent = subtitle;
+      small.style.display = "block";
 
-    if (artist) {
-      const artistElement = document.createElement("small");
-      artistElement.className = "music_artist";
-      artistElement.textContent = artist;
-      info.appendChild(artistElement);
-    }
+      line.append(main, small);
+      return line;
+    };
 
-    if (album) {
-      const albumElement = document.createElement("small");
-      albumElement.className = "music_album";
-      albumElement.textContent = album;
-      info.appendChild(albumElement);
-    }
+    cell.append(
+      createLine(`<img src="./assets/icons/music.svg" width="12px" class="tint"/>`, title, artist),
+      createLine(``, album, `${format} - ${tag}`),
+    );
 
-    const formatElement = document.createElement("small");
-    formatElement.className = "music_format";
-    formatElement.textContent =
-      filename.split(".").pop().toUpperCase();
-
-    info.appendChild(formatElement);
-
-    card.appendChild(info);
+    row.appendChild(cell);
 
     /*
      * Click → play using existing audio element
      */
-    card.addEventListener("click", () => {
+    const play = () => {
       audio.src = url;
+      AUDIOPLAYER_TITLE.textContent = title;
+      AUDIOPLAYER_SUB.textContent = artist;
+      fileformat = file.name;
       audio.load();
       audio.play().catch(console.error);
+    };
+
+    row.addEventListener("click", play);
+    row.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        play();
+      }
     });
 
-    parent.appendChild(card);
+    parent.appendChild(row);
   });
 }
 
-API_MUSIC_GET();
+let musicPlayer = document.getElementById("music_player");
+const AUDIOPLAYER_ICON = document.getElementById("AUDIOPLAYER_ICON");
+const AUDIOPLAYER_PLAYBTN = document.getElementById("AUDIOPLAYER_PLAYBTN");
+const AUDIOPLAYER_SLIDER = document.getElementById("AUDIOPLAYER_SLIDER");
+const AUDIOPLAYER_DOWNLOAD = document.getElementById("AUDIOPLAYER_DOWNLOAD");
+
+if (AUDIOPLAYER_DOWNLOAD && musicPlayer) {
+  AUDIOPLAYER_DOWNLOAD.addEventListener("click", async () => {
+    if (!musicPlayer.src) return;
+
+    try {
+      const response = await fetch(musicPlayer.src);
+      if (!response.ok) {
+        throw new Error(`Download failed: HTTP ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = fileformat;
+      link.click();
+      URL.revokeObjectURL(objectUrl);
+    } catch (error) {
+      console.error("Unable to download the current track:", error);
+    }
+  });
+}
+
+let UPDATE_ON_NONINPUT = true;
+
+if (musicPlayer) {
+  AUDIOPLAYER_SLIDER.addEventListener("mouseenter", () => {
+    UPDATE_ON_NONINPUT = false;
+  });
+  AUDIOPLAYER_SLIDER.addEventListener("mouseleave", () => {
+    UPDATE_ON_NONINPUT = true;
+  });
+  AUDIOPLAYER_SLIDER.addEventListener("touchstart", () => {
+    UPDATE_ON_NONINPUT = false;
+  });
+  AUDIOPLAYER_SLIDER.addEventListener("touchend", () => {
+    UPDATE_ON_NONINPUT = true;
+  });
+  AUDIOPLAYER_SLIDER.addEventListener("touchcancel", () => {
+    UPDATE_ON_NONINPUT = true;
+  });
+
+  const setPlayerState = (state) => {
+    const icon = state ? "pause" : "play_arrow";
+    AUDIOPLAYER_ICON.src = "../assets/icons/" + icon + ".svg";
+  };
+
+  const updatePlayerProgress = () => {
+    if (!UPDATE_ON_NONINPUT) return;
+
+    const progress = musicPlayer.duration
+      ? (musicPlayer.currentTime / musicPlayer.duration) * 100
+      : 0;
+
+    AUDIOPLAYER_SLIDER.style.backgroundSize = progress + "% 100%";
+    const clamped = Math.min(100, Math.max(0, progress));
+    musicPlayer.dataset.progress = String(clamped);
+    musicPlayer.setAttribute("data-progress", String(clamped));
+    AUDIOPLAYER_SLIDER.value = progress;
+  };
+
+  const seek = (e) => {
+    if (!Number.isFinite(musicPlayer.duration) || musicPlayer.duration <= 0)
+      return;
+
+    const value = Number(e.target.value);
+    if (!Number.isFinite(value)) return;
+
+    const progress = Math.min(100, Math.max(0, value));
+    e.target.style.backgroundSize = progress + "% 100%";
+    musicPlayer.currentTime = (progress / 100) * musicPlayer.duration;
+  };
+
+  const seek_notaudio = (e) => {
+    if (!Number.isFinite(musicPlayer.duration) || musicPlayer.duration <= 0)
+      return;
+
+    const value = Number(e.target.value);
+    if (!Number.isFinite(value)) return;
+
+    const progress = Math.min(100, Math.max(0, value));
+    e.target.style.backgroundSize = progress + "% 100%";
+  };
+
+  AUDIOPLAYER_SLIDER.addEventListener("change", seek);
+  AUDIOPLAYER_SLIDER.addEventListener("input", seek_notaudio);
+
+  AUDIOPLAYER_PLAYBTN.addEventListener("click", () => {
+    if (musicPlayer.paused) {
+      musicPlayer.play();
+    } else {
+      musicPlayer.pause();
+    }
+  });
+
+  musicPlayer.addEventListener("play", () => setPlayerState(true));
+  musicPlayer.addEventListener("pause", () => setPlayerState(false));
+  musicPlayer.addEventListener("ended", () => setPlayerState(false));
+  musicPlayer.addEventListener("timeupdate", updatePlayerProgress);
+  musicPlayer.addEventListener("loadedmetadata", updatePlayerProgress);
+
+  setPlayerState(!musicPlayer.paused);
+  updatePlayerProgress();
+}
+
+async function getMusic() {
+  await API_MUSIC_GET("vjdyofficialmusic-2025");
+  await API_MUSIC_GET("vjdyofficialmusic-2024");
+  await API_MUSIC_GET("vjdyofficialmusic-2023");
+  await API_MUSIC_GET("vjdyofficialmusic-2022");
+}
+
+getMusic();
+
+function API_PLAYER_SCROLL() {
+  const player = document.querySelector(".player");
+
+  if (!player) return;
+
+  const atBottom =
+    window.innerHeight + window.scrollY >=
+    document.documentElement.scrollHeight - 2;
+
+  player.classList.toggle("at-bottom", atBottom);
+}
+
+window.addEventListener("scroll", API_PLAYER_SCROLL, { passive: true });
+window.addEventListener("resize", API_PLAYER_SCROLL);
+
+API_PLAYER_SCROLL();
+

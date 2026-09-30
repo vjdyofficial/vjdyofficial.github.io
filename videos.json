@@ -42,6 +42,12 @@
 		"date": "December 4 2025"
 	},
 	{
+		"title": "UCCP Naga Christmas Institute 2025",
+		"file": "copy_59AFDAF4-1594-46B7-8824-B30C790409D7.mov",
+        "releasetag": "avp",
+		"date": "January 4 2026"
+	},
+	{
 		"title": "UCCP Naga VCS 2026",
 		"file": "lv_0_20260503091351-2.mp4",
         "releasetag": "uccpnaga-sde",
@@ -58,5 +64,17 @@
 		"file": "WHITE.TOYOTA.TV.VERSION.mp4",
         "releasetag": "avp",
 		"date": "June 10 2026"
+	},
+	{
+		"title": "Fita Ads by Alianna Pangilinan",
+		"file": "FITA.mp4",
+        "releasetag": "commercial-proj",
+		"date": "June 6 2026"
+	},
+	{
+		"title": "LAVA CHICKENNN - BOUNTY FRESH CHICKEN",
+		"file": "LAVA.CHICKEN.mp4",
+        "releasetag": "commercial-proj",
+		"date": "May 25 2026"
 	}
 ]
