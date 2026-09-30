@@ -29,6 +29,10 @@ async function API_MUSIC_GET(id) {
     (res) => res.json(),
   );
 
+  if (!data || typeof data !== "object" || Array.isArray(data) || !Array.isArray(data.files)) {
+    return;
+  }
+
   const table = document.getElementById("tablex");
   const audio = document.getElementById("music_player");
 
@@ -224,6 +228,9 @@ if (musicPlayer) {
 }
 
 async function getMusic() {
+  await API_MUSIC_GET("vjdyofficialmusic-2026-Stereo");
+  await API_MUSIC_GET("vjdyofficialmusic-2026-5.1");
+  await API_MUSIC_GET("vjdyofficialmusic-2026-7.1");
   await API_MUSIC_GET("vjdyofficialmusic-2025");
   await API_MUSIC_GET("vjdyofficialmusic-2024");
   await API_MUSIC_GET("vjdyofficialmusic-2023");
