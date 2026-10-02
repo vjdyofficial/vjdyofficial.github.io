@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/styles.css" />
     <link rel="stylesheet" href="./src/fonts.css" title="Fonts" />
+    <link rel="icon" href="./favicon.ico">
     <script src="./shopmusic.js" defer></script>
     <title>VJDY Official Music Store</title>
   </head>
@@ -12,27 +13,45 @@
   <body>
     <audio id="music_player"></audio>
     <nav>
-      <button
-        type="button"
-        class="back-button"
-        onclick="
-          history.length > 1
-            ? history.back()
-            : (window.location.href = window.location.origin)
-        ">
-        <img src="./assets/icons/arrow_back.svg" class="tint" alt="Instagram" />
-      </button>
-      <img
-        alt="Logo"
-        src="./assets/logo/music.svg"
-        height="32px"
-        style="cursor: pointer; -webkit-user-drag: auto"
-        onclick="window.location.href = window.location.origin" />
-      <input
-        id="MUSICSEARCH_BOX"
-        type="search"
-        placeholder="Search music title, artist, album, year or tag..."
-        oninput="API_MUSICSEARCH()" />
+      <div class="nav_layout">
+        <span>
+          <button
+            type="button"
+            class="back-button"
+            onclick="
+              history.length > 1
+                ? history.back()
+                : (window.location.href = window.location.origin)
+            ">
+            <img
+              src="./assets/icons/arrow_back.svg"
+              class="tint"
+              alt="Instagram" />
+          </button>
+          <img
+            alt="Logo"
+            src="./assets/logo/music.svg"
+            height="32px"
+            style="cursor: pointer; -webkit-user-drag: auto"
+            onclick="window.location.href = window.location.origin" />
+        </span>
+        <span>
+          <input
+            id="MUSICSEARCH_BOX"
+            type="search"
+            placeholder="Search music title, artist, album, year or tag..."
+            oninput="API_MUSICSEARCH()" />
+          <select id="API_MUSIC_CATEGORY" onchange="API_MUSICFETCH();">
+            <option value="2026-stereoformat">2026 Music - Stereo</option>
+            <option value="2026-5.1">2026 Music - 5.1</option>
+            <option value="2026-7.1">2026 Music - 7.1</option>
+            <option value="2025">2025 Music</option>
+            <option value="2024">2024 Music</option>
+            <option value="2023">2023 Music</option>
+            <option value="2022">2022 Music</option>
+          </select>
+        </span>
+      </div>
     </nav>
     <header>
       <div class="MNS_AREA_1">

@@ -53,9 +53,6 @@ const loadVideos = () => {
 
   closeButton.addEventListener("click", closeDialog);
   dialog.addEventListener("cancel", closeDialog);
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) closeDialog();
-  });
 
   fetch("./videos.json")
     .then((response) => {

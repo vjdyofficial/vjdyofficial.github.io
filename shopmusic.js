@@ -1,8 +1,14 @@
-window.identifier = "vjdyofficialmusic-2025";
+window.identifier = "2026-stereoformat";
 let fileformat = "";
 
 const AUDIOPLAYER_TITLE = document.getElementById("AUDIOPLAYER_TITLE");
 const AUDIOPLAYER_SUB = document.getElementById("AUDIOPLAYER_SUB");
+
+let musicPlayer = document.getElementById("music_player");
+const AUDIOPLAYER_ICON = document.getElementById("AUDIOPLAYER_ICON");
+const AUDIOPLAYER_PLAYBTN = document.getElementById("AUDIOPLAYER_PLAYBTN");
+const AUDIOPLAYER_SLIDER = document.getElementById("AUDIOPLAYER_SLIDER");
+const AUDIOPLAYER_DOWNLOAD = document.getElementById("AUDIOPLAYER_DOWNLOAD");
 
 function API_MUSICSEARCH(query) {
   if (query === undefined) {
@@ -23,6 +29,11 @@ function API_MUSICSEARCH(query) {
 }
 
 async function API_MUSIC_GET(id) {
+  const table = document.getElementById("tablex");
+  const audio = musicPlayer;
+
+  table.innerHTML = "";
+
   const identifier = id;
 
   const data = await fetch(`https://archive.org/metadata/${identifier}`).then(
@@ -32,9 +43,6 @@ async function API_MUSIC_GET(id) {
   if (!data || typeof data !== "object" || Array.isArray(data) || !Array.isArray(data.files)) {
     return;
   }
-
-  const table = document.getElementById("tablex");
-  const audio = document.getElementById("music_player");
 
   if (!table || !audio) return;
 
@@ -87,7 +95,7 @@ async function API_MUSIC_GET(id) {
 
     cell.append(
       createLine(`<img src="./assets/icons/music.svg" width="12px" class="tint"/>`, title, artist),
-      createLine(``, album, `${format} - ${tag}`),
+      createLine(``, album, `${format}`),
     );
 
     row.appendChild(cell);
@@ -99,6 +107,15 @@ async function API_MUSIC_GET(id) {
       audio.src = url;
       AUDIOPLAYER_TITLE.textContent = title;
       AUDIOPLAYER_SUB.textContent = artist;
+
+      if ('mediaSession' in navigator && navigator.mediaSession) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title,
+          artist,
+          album
+        });
+      }
+
       fileformat = file.name;
       audio.load();
       audio.play().catch(console.error);
@@ -115,12 +132,6 @@ async function API_MUSIC_GET(id) {
     parent.appendChild(row);
   });
 }
-
-let musicPlayer = document.getElementById("music_player");
-const AUDIOPLAYER_ICON = document.getElementById("AUDIOPLAYER_ICON");
-const AUDIOPLAYER_PLAYBTN = document.getElementById("AUDIOPLAYER_PLAYBTN");
-const AUDIOPLAYER_SLIDER = document.getElementById("AUDIOPLAYER_SLIDER");
-const AUDIOPLAYER_DOWNLOAD = document.getElementById("AUDIOPLAYER_DOWNLOAD");
 
 if (AUDIOPLAYER_DOWNLOAD && musicPlayer) {
   AUDIOPLAYER_DOWNLOAD.addEventListener("click", async () => {
@@ -227,17 +238,12 @@ if (musicPlayer) {
   updatePlayerProgress();
 }
 
-async function getMusic() {
-  await API_MUSIC_GET("vjdyofficialmusic-2026-Stereo");
-  await API_MUSIC_GET("vjdyofficialmusic-2026-5.1");
-  await API_MUSIC_GET("vjdyofficialmusic-2026-7.1");
-  await API_MUSIC_GET("vjdyofficialmusic-2025");
-  await API_MUSIC_GET("vjdyofficialmusic-2024");
-  await API_MUSIC_GET("vjdyofficialmusic-2023");
-  await API_MUSIC_GET("vjdyofficialmusic-2022");
-}
+const API_MUSICFETCH = (e) => {
+  window.identifier = document.getElementById("API_MUSIC_CATEGORY")?.value;
+  API_MUSIC_GET("vjdyofficialmusic-" + window.identifier);
+};
 
-getMusic();
+API_MUSIC_GET("vjdyofficialmusic-" + window.identifier);
 
 function API_PLAYER_SCROLL() {
   const player = document.querySelector(".player");
