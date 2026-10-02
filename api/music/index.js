@@ -2,10 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const mm = require("music-metadata");
 const sharp = require("sharp");
+const year = "2024"
 
-const MUSIC_DIR = path.join(__dirname, "music-2022");
-const OUTPUT_FILE = path.join(__dirname, "music-2022.json");
-const ARTWORK_DIR = path.join(__dirname, "artwork-2022");
+const MUSIC_DIR = path.join(__dirname, "music-" + year);
+const OUTPUT_FILE = path.join(__dirname, "music-" + year + ".json");
+const ARTWORK_DIR = path.join(__dirname, "artwork-" + year);
 
 const AUDIO_EXTENSIONS = new Set([
     ".mp3",
@@ -108,7 +109,7 @@ async function generateMusicJSON() {
                     })
                     .toFile(artworkPath);
 
-                item.picture = `artwork-2022/${artworkName}`;
+                item.picture = `artwork-${year}/${artworkName}`;
             }
 
             music.push(item);
