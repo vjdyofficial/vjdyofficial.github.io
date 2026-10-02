@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const mm = require("music-metadata");
 const sharp = require("sharp");
-const year = "2024"
+const year = "2025"
 
 const MUSIC_DIR = path.join(__dirname, "music-" + year);
 const OUTPUT_FILE = path.join(__dirname, "music-" + year + ".json");
