@@ -7,7 +7,9 @@ function API_SEARCH(query) {
   const body = table?.tBodies[0];
   if (!body) return;
 
-  const search = String(query ?? "").trim().toLocaleLowerCase();
+  const search = String(query ?? "")
+    .trim()
+    .toLocaleLowerCase();
   Array.from(body.rows).forEach((row) => {
     const title = row.cells[0]?.textContent ?? "";
     row.style.display = title.toLocaleLowerCase().includes(search)
@@ -42,10 +44,11 @@ const loadVideos = () => {
 
       videos.forEach((video) => {
         const row = tableBody.insertRow();
-
         const cell = row.insertCell();
 
+        // Movie icon
         const icon = document.createElement("img");
+
         icon.src = "./assets/icons/movie.svg";
         icon.width = 18;
         icon.className = "tint";
@@ -53,35 +56,82 @@ const loadVideos = () => {
 
         cell.append(icon);
 
+        // Video information
         const span = document.createElement("span");
 
         [video.title, video.releasetag, video.date].forEach((value) => {
           const text = document.createElement("p");
+
           text.textContent = value ?? "";
+
           span.append(text);
         });
 
         cell.append(span);
 
-        const downloadButton = document.createElement("a");
-
-        downloadButton.className = "back-button";
-        downloadButton.href =
+        /*
+         * GitHub Release video URL
+         */
+        const videoURL =
           "https://github.com/vjdyofficial/vjdyofficial/releases/download/" +
           encodeURIComponent(String(video.releasetag)) +
           "/" +
           encodeURIComponent(String(video.file));
 
+        /*
+         * STREAM button
+         */
+        const streamButton = document.createElement("a");
+
+        streamButton.className = "back-button";
+
+        streamButton.href = "./player.html?src=" + encodeURIComponent(videoURL);
+
+        streamButton.target = "_blank";
+
+        streamButton.rel = "noopener noreferrer";
+
+        streamButton.innerHTML = `
+          <img
+            src="./assets/icons/play_arrow.svg"
+            class="tint"
+            alt=""
+          />
+          <span>Stream</span>
+        `;
+
+        streamButton.setAttribute(
+          "aria-label",
+          `Stream ${video.title ?? "video"}`,
+        );
+
+        cell.append(streamButton);
+
+        /*
+         * DOWNLOAD button
+         */
+        const downloadButton = document.createElement("a");
+
+        downloadButton.className = "back-button";
+
+        downloadButton.href = videoURL;
+
         downloadButton.target = "_blank";
+
         downloadButton.rel = "noopener noreferrer";
+
         downloadButton.innerHTML = `
-          <img src="./assets/icons/download.svg" class="tint" alt="" />
+          <img
+            src="./assets/icons/download.svg"
+            class="tint"
+            alt=""
+          />
           <span>Download</span>
         `;
 
         downloadButton.setAttribute(
           "aria-label",
-          `Download ${video.title ?? "video"}`
+          `Download ${video.title ?? "video"}`,
         );
 
         cell.append(downloadButton);

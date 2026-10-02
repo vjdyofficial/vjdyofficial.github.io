@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>VJDY Video Player</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #111;
+            color: #fff;
+
+            font-family:
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            overflow: hidden;
+        }
+
+        .player {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            background: #000;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+        .error {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            max-width: 90%;
+
+            padding: 20px;
+
+            text-align: center;
+
+            background: rgba(0, 0, 0, 0.85);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 12px;
+
+            display: none;
+        }
+
+        .error h2 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+        .error p {
+            margin: 0;
+
+            color: #bbb;
+
+            font-size: 14px;
+
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="player">
+
+        <video
+            id="videoPlayer"
+            controls
+            playsinline
+            preload="metadata"
+        ></video>
+
+        <div
+            id="error"
+            class="error"
+        >
+            <h2>Unable to play video</h2>
+
+            <p id="errorMessage">
+                The video could not be loaded.
+            </p>
+        </div>
+
+    </main>
+
+    <script>
+        const videoPlayer =
+            document.getElementById("videoPlayer");
+
+        const errorBox =
+            document.getElementById("error");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+
+        /*
+         * Get the video URL from:
+         *
+         * player.html?src=VIDEO_URL
+         */
+        const params =
+            new URLSearchParams(window.location.search);
+
+        const videoURL =
+            params.get("src");
+
+
+        if (!videoURL) {
+
+            showError(
+                "No video URL was provided."
+            );
+
+        } else {
+
+            try {
+
+                /*
+                 * Decode the URL if necessary.
+                 */
+                const decodedURL =
+                    decodeURIComponent(videoURL);
+
+                videoPlayer.src = decodedURL;
+
+                videoPlayer.load();
+
+            } catch (error) {
+
+                console.error(error);
+
+                showError(
+                    "The video URL is invalid."
+                );
+            }
+        }
+
+
+        /*
+         * Video loading error
+         */
+        videoPlayer.addEventListener(
+            "error",
+            () => {
+
+                console.error(
+                    "Video error:",
+                    videoPlayer.error
+                );
+
+                showError(
+                    "The browser could not play this MP4. " +
+                    "The file may not be available, " +
+                    "or the server may not support browser playback."
+                );
+            }
+        );
+
+
+        /*
+         * Hide error once playback successfully starts.
+         */
+        videoPlayer.addEventListener(
+            "loadedmetadata",
+            () => {
+
+                errorBox.style.display = "none";
+
+                document.title =
+                    "VJDY Video Player";
+            }
+        );
+
+
+        function showError(message) {
+
+            errorMessage.textContent = message;
+
+            errorBox.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
