@@ -20,39 +20,8 @@ const loadVideos = () => {
   const table = document.getElementById("tablex");
 
   if (!table) return;
+
   const tableBody = table.tBodies[0] || table.createTBody();
-
-  const dialog = document.createElement("dialog");
-  const closeButton = document.createElement("button");
-  const videoPlayer = document.createElement("video");
-
-  closeButton.type = "button";
-  closeButton.className = "back-button";
-  closeButton.style.marginBottom = "8px";
-  closeButton.innerHTML = `
-        <img src="./assets/icons/close.svg" class="tint" alt="Instagram" />
-        <span>Close</span>
-      `;
-  closeButton.setAttribute("aria-label", "Close");
-  closeButton.addEventListener("click", () => dialog.close());
-  dialog.appendChild(closeButton);
-  dialog.className = "videodialog";
-
-  videoPlayer.controls = true;
-  videoPlayer.preload = "metadata";
-
-  dialog.append(closeButton, videoPlayer);
-  document.body.append(dialog);
-
-  const closeDialog = () => {
-    videoPlayer.pause();
-    videoPlayer.removeAttribute("src");
-    videoPlayer.load();
-    if (dialog.open) dialog.close();
-  };
-
-  closeButton.addEventListener("click", closeDialog);
-  dialog.addEventListener("cancel", closeDialog);
 
   fetch("./videos.json")
     .then((response) => {
@@ -78,8 +47,10 @@ const loadVideos = () => {
 
         const icon = document.createElement("img");
         icon.src = "./assets/icons/movie.svg";
-        icon.width = "18"
+        icon.width = 18;
         icon.className = "tint";
+        icon.alt = "";
+
         cell.append(icon);
 
         const span = document.createElement("span");
@@ -92,32 +63,28 @@ const loadVideos = () => {
 
         cell.append(span);
 
-        const openVideo = () => {
-          if (!video.file) return;
+        const downloadButton = document.createElement("a");
 
-          videoPlayer.src =
-            "https://github.com/vjdyofficial/vjdyofficial/releases/download/" +
-            String(video.releasetag) +
-            "/" +
-            String(video.file);
+        downloadButton.className = "back-button";
+        downloadButton.href =
+          "https://github.com/vjdyofficial/vjdyofficial/releases/download/" +
+          encodeURIComponent(String(video.releasetag)) +
+          "/" +
+          encodeURIComponent(String(video.file));
 
-          if (!dialog.open) dialog.showModal();
+        downloadButton.target = "_blank";
+        downloadButton.rel = "noopener noreferrer";
+        downloadButton.innerHTML = `
+          <img src="./assets/icons/download.svg" class="tint" alt="" />
+          <span>Download</span>
+        `;
 
-          videoPlayer.play().catch((error) => {
-            console.warn("Autoplay was blocked:", error);
-          });
-        };
+        downloadButton.setAttribute(
+          "aria-label",
+          `Download ${video.title ?? "video"}`
+        );
 
-        row.tabIndex = 0;
-
-        row.addEventListener("click", openVideo);
-
-        row.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            openVideo();
-          }
-        });
+        cell.append(downloadButton);
       });
     })
     .catch((error) => {

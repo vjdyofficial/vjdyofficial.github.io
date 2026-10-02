@@ -8,11 +8,11 @@
   --accentcolor-1: #dfff93;
   --accentcolor-2: hsl(165, 100%, 79%);
   --limit: 1600px;
-  --fontset-standard: "Roboto", "Noto Color Emoji", system-ui, Arial, sans-serif;
-  --fontset-sans: "Roboto", "Noto Color Emoji", system-ui, Arial, sans-serif;
-  --fontset-serif: "Noto Serif", "Noto Color Emoji", "Times New Roman", Arial, serif;
-  --fontset-mono: "Roboto Mono", "Noto Color Emoji", Consolas, monospace;
-  --fontset-mono-substitute: "Inconsolata", "Noto Color Emoji", Consolas, monospace;
+  --fontset-standard: "Roboto", system-ui, Arial, sans-serif;
+  --fontset-sans: "Roboto", system-ui, Arial, sans-serif;
+  --fontset-serif: "Noto Serif", "Times New Roman", Arial, serif;
+  --fontset-mono: "Roboto Mono", Consolas, monospace;
+  --fontset-mono-substitute: "Inconsolata", Consolas, monospace;
 }
 
 html::selection {
@@ -346,7 +346,7 @@ dialog::backdrop {
     display: inline-block;
     padding-left: 105%;
     animation: ticker-scroll 15s linear infinite;
-    animation-duration: calc(15s * var(--speed, 1));
+    animation-duration: calc(20s * var(--speed, 1));
   }
 
   .ticker-track span {

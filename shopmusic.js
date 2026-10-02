@@ -1,4 +1,4 @@
-window.identifier = "2026-stereoformat";
+window.identifier = "2022";
 let fileformat = "";
 
 const AUDIOPLAYER_TITLE = document.getElementById("AUDIOPLAYER_TITLE");
@@ -31,130 +31,244 @@ function API_MUSICSEARCH(query) {
 }
 
 async function API_MUSIC_GET(id) {
-  const table = document.getElementById("tablex");
-  const audio = musicPlayer;
+    const table = document.getElementById("tablex");
+    const audio = musicPlayer;
 
-  table.innerHTML = "";
+    if (!table || !audio) return;
 
-  const identifier = id;
+    table.innerHTML = "";
 
-  const data = await fetch(`https://archive.org/metadata/${identifier}`).then(
-    (res) => res.json(),
-  );
+    const identifier = id;
 
-  if (!data || typeof data !== "object" || Array.isArray(data) || !Array.isArray(data.files)) {
-    return;
-  }
+    try {
+        /*
+         * Get generated music metadata JSON
+         *
+         * Example:
+         * id = "2022"
+         *
+         * → ./api/music/music-2022.json
+         */
+        const response = await fetch(
+            `./api/music/music-${identifier}.json`
+        );
 
-  if (!table || !audio) return;
-
-  const parent = table.tBodies[0] || table.createTBody();
-  const tag = identifier.replace("vjdyofficial", "").replace("music-", "")
-  const detectSurround = tag.includes("5.1") || tag.includes("7.1") ? "flac" : "mp3";
-
-  const files = data.files.filter((file) =>
-    new RegExp(`\\.${detectSurround}$`, "i").test(file.name),
-  );
-
-  files.forEach((file) => {
-    /*
-     * File metadata
-     */
-    const title =
-      file.title ||
-      file.name
-        .split("/")
-        .pop()
-        .replace(/\.(mp3|flac)$/i, "");
-
-    const artist = file.artist || file.creator || data.metadata?.creator || "";
-
-    const album = file.album || "";
-
-    const format = file.name.split(".").pop().toUpperCase();
-
-    const url =
-      `https://archive.org/download/${identifier}/` +
-      file.name.split("/").map(encodeURIComponent).join("/");
-
-    const row = document.createElement("tr");
-    row.className = "music_main";
-    row.tabIndex = 0;
-    row.style.display = "table-row";
-
-    const cell = document.createElement("td");
-    cell.colSpan = 3;
-    cell.style.display = "table-cell";
-
-    const createLine = (icon, value, subtitle) => {
-      const line = document.createElement("div");
-      const main = document.createElement("span");
-      main.innerHTML = `${icon} ${value}`;
-
-      const small = document.createElement("small");
-      small.textContent = subtitle;
-      small.style.display = "block";
-
-      line.append(main, small);
-      return line;
-    };
-
-    cell.append(
-      createLine(`<img src="./assets/icons/music.svg" width="12px" class="tint"/>`, title, artist),
-      createLine(``, album, `${format}`),
-    );
-
-    row.appendChild(cell);
-
-    /*
-     * Click → play using existing audio element
-     */
-    const play = async () => {
-      if (url === lastUrl) { return }
-      lastUrl = url;
-
-      AUDIOPLAYER_TITLE.textContent = title;
-      AUDIOPLAYER_SUB.textContent = artist;
-
-      if ('mediaSession' in navigator && navigator.mediaSession) {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title,
-          artist,
-          album
-        });
-      }
-
-      if (BLOB_LINK_SRC) {
-        URL.revokeObjectURL(BLOB_LINK_SRC);
-        BLOB_LINK_SRC = null;
-      }
-
-      fileformat = file.name;
-      try {
-        const response = await fetch(url);
         if (!response.ok) {
-          throw new Error(`Track load failed: HTTP ${response.status}`);
+            throw new Error(
+                `Music metadata failed: HTTP ${response.status}`
+            );
         }
-        BLOB_LINK_SRC = await response.blob();
-        audio.src = BLOB_LINK_SRC ? URL.createObjectURL(BLOB_LINK_SRC) : url;
-      } catch (error) {
-        BLOB_LINK_SRC = null;
-        console.error("Unable to prepare the track download:", error);
-      }
-      audio.load();
-      audio.play().catch(console.error);
-    };
 
-    row.addEventListener("click", play);
-    row.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        play();
-      }
-    });
+        const data = await response.json();
 
-    parent.appendChild(row);
-  });
+        if (!Array.isArray(data)) {
+            console.error("Invalid music metadata JSON.");
+            return;
+        }
+
+        const parent = table.tBodies[0] || table.createTBody();
+
+        /*
+         * Get each music entry
+         */
+        data.forEach((file) => {
+            if (!file || typeof file !== "object") return;
+
+            const title = file.title || "Unknown Title";
+            const artist = file.artist || "";
+            const album = file.album || "";
+            const fileName = file.file || "";
+
+            /*
+             * Artwork generated by Node.js
+             */
+            const picture = file.picture || "";
+
+            /*
+             * Music file URL
+             *
+             * If the JSON is in:
+             * ./api/music/music-2022.json
+             *
+             * and music is:
+             * ./api/music/music-2022/Song.mp3
+             *
+             * then this resolves correctly.
+             */
+            const url = fileName
+                ? `./api/music/music-${identifier}/${fileName
+                    .split("/")
+                    .map(encodeURIComponent)
+                    .join("/")}`
+                : "";
+
+            const format = fileName
+                ? fileName.split(".").pop().toUpperCase()
+                : "";
+
+            /*
+             * Create table row
+             */
+            const row = document.createElement("tr");
+
+            row.className = "music_main";
+            row.tabIndex = 0;
+            row.style.display = "table-row";
+
+            const cell = document.createElement("td");
+
+            cell.colSpan = 3;
+            cell.style.display = "table-cell";
+
+            /*
+             * Create music information line
+             */
+            const createLine = (icon, value, subtitle) => {
+                const line = document.createElement("div");
+
+                const main = document.createElement("span");
+
+                main.innerHTML = `${icon} ${value}`;
+
+                const small = document.createElement("small");
+
+                small.textContent = subtitle;
+                small.style.display = "block";
+
+                line.append(main, small);
+
+                return line;
+            };
+
+            cell.append(
+                createLine(
+                    `<img src="./assets/icons/music.svg" width="12px" class="tint"/>`,
+                    title,
+                    artist
+                ),
+
+                createLine(
+                    "",
+                    album,
+                    format
+                )
+            );
+
+            row.appendChild(cell);
+
+            /*
+             * Click → play
+             */
+            const play = async () => {
+                if (!url || url === lastUrl) {
+                    return;
+                }
+
+                lastUrl = url;
+
+                AUDIOPLAYER_TITLE.textContent = title;
+                AUDIOPLAYER_SUB.textContent = artist;
+
+                /*
+                 * Media Session
+                 */
+                if (
+                    "mediaSession" in navigator &&
+                    navigator.mediaSession
+                ) {
+                    navigator.mediaSession.metadata =
+                        new MediaMetadata({
+                            title,
+                            artist,
+                            album,
+                            artwork: picture
+                                ? [
+                                    {
+                                        src: picture,
+                                        type: "image/webp"
+                                    }
+                                ]
+                                : []
+                        });
+                }
+
+                /*
+                 * Release previous Blob URL
+                 */
+                if (BLOB_LINK_SRC) {
+                    URL.revokeObjectURL(BLOB_LINK_SRC);
+                    BLOB_LINK_SRC = null;
+                }
+
+                fileformat = fileName;
+
+                try {
+                    /*
+                     * Fetch MP3
+                     */
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        throw new Error(
+                            `Track load failed: HTTP ${response.status}`
+                        );
+                    }
+
+                    /*
+                     * Convert to Blob
+                     */
+                    BLOB_LINK_SRC = await response.blob();
+
+                    /*
+                     * Create temporary Blob URL
+                     */
+                    audio.src = BLOB_LINK_SRC
+                        ? URL.createObjectURL(BLOB_LINK_SRC)
+                        : url;
+
+                } catch (error) {
+                    BLOB_LINK_SRC = null;
+
+                    console.error(
+                        "Unable to prepare the track:",
+                        error
+                    );
+
+                    return;
+                }
+
+                audio.load();
+
+                audio.play().catch(console.error);
+            };
+
+            /*
+             * Mouse
+             */
+            row.addEventListener("click", play);
+
+            /*
+             * Keyboard
+             */
+            row.addEventListener("keydown", (event) => {
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+                    event.preventDefault();
+                    play();
+                }
+            });
+
+            parent.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error(
+            "Unable to load music metadata:",
+            error
+        );
+    }
 }
 
 if (AUDIOPLAYER_DOWNLOAD && musicPlayer) {
@@ -257,10 +371,10 @@ if (musicPlayer) {
 
 const API_MUSICFETCH = (e) => {
   window.identifier = document.getElementById("API_MUSIC_CATEGORY")?.value;
-  API_MUSIC_GET("vjdyofficialmusic-" + window.identifier);
+  API_MUSIC_GET(window.identifier);
 };
 
-API_MUSIC_GET("vjdyofficialmusic-" + window.identifier);
+API_MUSIC_GET(window.identifier);
 
 function API_PLAYER_SCROLL() {
   const player = document.querySelector(".player");

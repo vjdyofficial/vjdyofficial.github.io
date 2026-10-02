@@ -1,0 +1,19 @@
+{
+  "name": "music",
+  "version": "1.0.0",
+  "description": "VJDY Music Metadata Generator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "generate": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "music-metadata": "^11.16.1",
+    "sharp": "^0.35.5"
+  }
+}
