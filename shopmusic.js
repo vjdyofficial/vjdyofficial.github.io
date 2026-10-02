@@ -181,10 +181,13 @@ async function API_MUSIC_GET(id) {
         }
 
         fileformat = fileName;
+        audio.src = url;
+        audio.preload = "auto";
+        audio.load();
+        audio.play().catch(console.error);
 
         try {
           // Playback uses the original URL; retain the fetched Blob for downloading.
-          audio.src = url;
 
           const response = await fetch(url);
           if (!response.ok) {
@@ -197,10 +200,6 @@ async function API_MUSIC_GET(id) {
         } catch (error) {
           console.error("Unable to prepare the track download:", error);
         }
-
-        audio.load();
-
-        audio.play().catch(console.error);
       };
 
       /*
