@@ -5,6 +5,8 @@ const AUDIOPLAYER_TITLE = document.getElementById("AUDIOPLAYER_TITLE");
 const AUDIOPLAYER_SUB = document.getElementById("AUDIOPLAYER_SUB");
 
 let musicPlayer = document.getElementById("music_player");
+let BLOB_LINK_SRC = null;
+let lastUrl = null;
 const AUDIOPLAYER_ICON = document.getElementById("AUDIOPLAYER_ICON");
 const AUDIOPLAYER_PLAYBTN = document.getElementById("AUDIOPLAYER_PLAYBTN");
 const AUDIOPLAYER_SLIDER = document.getElementById("AUDIOPLAYER_SLIDER");
@@ -48,7 +50,11 @@ async function API_MUSIC_GET(id) {
 
   const parent = table.tBodies[0] || table.createTBody();
   const tag = identifier.replace("vjdyofficial", "").replace("music-", "")
-  const files = data.files.filter((file) => /\.(mp3|flac)$/i.test(file.name));
+  const detectSurround = tag.includes("5.1") || tag.includes("7.1") ? "flac" : "mp3";
+
+  const files = data.files.filter((file) =>
+    new RegExp(`\\.${detectSurround}$`, "i").test(file.name),
+  );
 
   files.forEach((file) => {
     /*
@@ -103,8 +109,10 @@ async function API_MUSIC_GET(id) {
     /*
      * Click → play using existing audio element
      */
-    const play = () => {
-      audio.src = url;
+    const play = async () => {
+      if (url === lastUrl) { return }
+      lastUrl = url;
+
       AUDIOPLAYER_TITLE.textContent = title;
       AUDIOPLAYER_SUB.textContent = artist;
 
@@ -116,7 +124,23 @@ async function API_MUSIC_GET(id) {
         });
       }
 
+      if (BLOB_LINK_SRC) {
+        URL.revokeObjectURL(BLOB_LINK_SRC);
+        BLOB_LINK_SRC = null;
+      }
+
       fileformat = file.name;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Track load failed: HTTP ${response.status}`);
+        }
+        BLOB_LINK_SRC = await response.blob();
+        audio.src = BLOB_LINK_SRC ? URL.createObjectURL(BLOB_LINK_SRC) : url;
+      } catch (error) {
+        BLOB_LINK_SRC = null;
+        console.error("Unable to prepare the track download:", error);
+      }
       audio.load();
       audio.play().catch(console.error);
     };
@@ -135,21 +159,14 @@ async function API_MUSIC_GET(id) {
 
 if (AUDIOPLAYER_DOWNLOAD && musicPlayer) {
   AUDIOPLAYER_DOWNLOAD.addEventListener("click", async () => {
-    if (!musicPlayer.src) return;
+    if (!BLOB_LINK_SRC) return;
 
     try {
-      const response = await fetch(musicPlayer.src);
-      if (!response.ok) {
-        throw new Error(`Download failed: HTTP ${response.status}`);
-      }
-
-      const blob = await response.blob();
-      const objectUrl = URL.createObjectURL(blob);
+      const objectUrl = URL.createObjectURL(BLOB_LINK_SRC);
       const link = document.createElement("a");
       link.href = objectUrl;
       link.download = fileformat;
       link.click();
-      URL.revokeObjectURL(objectUrl);
     } catch (error) {
       console.error("Unable to download the current track:", error);
     }

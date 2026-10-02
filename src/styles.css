@@ -8,11 +8,11 @@
   --accentcolor-1: #dfff93;
   --accentcolor-2: hsl(165, 100%, 79%);
   --limit: 1600px;
-  --fontset-standard: "Roboto", system-ui, Arial, sans-serif;
-  --fontset-sans: "Roboto", system-ui, Arial, sans-serif;
-  --fontset-serif: "Noto Serif", "Times New Roman", Arial, serif;
-  --fontset-mono: "Roboto Mono", Consolas, monospace;
-  --fontset-mono-substitute: "Inconsolata", Consolas, monospace;
+  --fontset-standard: "Roboto", "Noto Color Emoji", system-ui, Arial, sans-serif;
+  --fontset-sans: "Roboto", "Noto Color Emoji", system-ui, Arial, sans-serif;
+  --fontset-serif: "Noto Serif", "Noto Color Emoji", "Times New Roman", Arial, serif;
+  --fontset-mono: "Roboto Mono", "Noto Color Emoji", Consolas, monospace;
+  --fontset-mono-substitute: "Inconsolata", "Noto Color Emoji", Consolas, monospace;
 }
 
 html::selection {
@@ -60,6 +60,11 @@ body {
   }
 }
 
+body {
+  scrollbar-color: var(--background) var(--strokecolor);
+}
+
+
 body::after {
   content: "";
   position: fixed;
@@ -88,6 +93,10 @@ header {
   width: 100%;
   max-width: var(--limit);
   margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 8px;
 }
 
 .tint {
@@ -214,9 +223,9 @@ dialog {
 }
 
 dialog::backdrop {
-  background-color: transparent;
+  background-color: var(--background);
   pointer-events: painted;
-  backdrop-filter: blur(24px);
+  opacity: 0.8;
 }
 
 .title_portfolio {
@@ -265,7 +274,8 @@ dialog::backdrop {
 .MNS_AREA_2 {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .MNS_AREA_3 {
@@ -273,6 +283,7 @@ dialog::backdrop {
   display: flex;
   overflow: hidden;
   overflow-x: auto;
+  gap: 8px;
 
   h1 {
     font-size: 18px;
@@ -367,14 +378,14 @@ nav {
   position: sticky;
   top: 8px;
   background-color: #141414;
-  border: 2px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   width: 100%;
   margin-bottom: 4px;
   padding: 16px;
   z-index: 50;
   gap: 16px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   max-width: var(--limit);
 
@@ -400,6 +411,7 @@ nav {
 
 button {
   position: relative;
+  overflow: hidden;
   margin-top: 12px;
   border: 1.5px solid var(--text);
   background: transparent;
@@ -428,17 +440,18 @@ button::after {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
   width: 0%;
   height: 100%;
   transition: all 0.2s ease;
   z-index: 1;
   backdrop-filter: invert(1);
+  transform: translateX(-50%);
 }
 
 button:active::after {
   width: 100%;
-  height: 100%;
+  height: 125%;
 }
 
 main {
@@ -471,6 +484,8 @@ section {
   margin-bottom: 4px;
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
+  padding: 8px;
+  gap: 8px;
 
   .info_main {
     display: flex;
@@ -502,6 +517,8 @@ section {
   margin-bottom: 4px;
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
+  padding: 8px;
+  gap: 8px;
 
   .info_main {
     display: flex;
@@ -536,7 +553,7 @@ section {
 
 @media (min-width: 768px) {
   .MNS_AREA_2 {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 
   .MNS_AREA_3 {
@@ -570,7 +587,7 @@ section {
 
 @media (min-width: 1440px) {
   .MNS_AREA_2 {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 
   .MNS_AREA_3 {
@@ -592,8 +609,9 @@ section {
 
 footer {
   background-color: #141414;
-  border: 2px solid var(--strokecolor);
+  border: 1.5px solid var(--strokecolor);
   width: 100%;
+  margin-top: 48px;
   max-width: var(--limit);
   margin-bottom: 4px;
   padding: 16px;

@@ -6,41 +6,51 @@
     <link rel="stylesheet" href="./src/styles.css" />
     <link rel="stylesheet" href="./src/fonts.css" title="Fonts" />
     <script src="./videos.js"></script>
-    <link rel="icon" href="./favicon.ico">
+    <link rel="icon" href="./favicon.ico" />
     <title>Videos by VJDY Official Pictures</title>
   </head>
 
   <body>
     <nav>
-      <button type="button" class="back-button" onclick="history.length > 1 ? history.back() : window.location.href = window.location.origin">
-        <img src="./assets/icons/arrow_back.svg" class="tint" alt="Instagram" />
-      </button>
-      <img
-        alt="Logo"
-        src="./assets/logo/officiallogo.svg"
-        height="32px"
-        style="cursor: pointer; -webkit-user-drag: auto;"
-        onclick="window.location.href = window.location.origin;"
-      />
-      <input
-        id="SEARCH_BOX"
-        type="search"
-        placeholder="Search videos by title, tag, and date..."
-        oninput="API_SEARCH()" />
+      <div class="nav_layout">
+        <span>
+          <button
+            type="button"
+            class="back-button"
+            onclick="
+              history.length > 1
+                ? history.back()
+                : (window.location.href = window.location.origin)
+            ">
+            <img
+              src="./assets/icons/arrow_back.svg"
+              class="tint"
+              alt="Instagram" />
+          </button>
+          <img
+            alt="Logo"
+            src="./assets/logo/officiallogo.svg"
+            height="32px"
+            style="cursor: pointer; -webkit-user-drag: auto"
+            onclick="window.location.href = window.location.origin" />
+          <h2>Videos</h2>
+        </span>
+        <span>
+          <input
+            id="SEARCH_BOX"
+            type="search"
+            placeholder="Search videos by title, tag, and date..."
+            oninput="API_SEARCH()" />
+        </span>
+      </div>
     </nav>
     <header>
       <div class="MNS_AREA_1">
-        <h1>
-          Videos
-        </h1>
-        <h2>
-         Same-Day Edits, Organization videos, and Archive projects.
-        </h2>
+        <h2>Same-Day Edits, Organization videos, and Archive projects.</h2>
       </div>
     </header>
     <main id="music_parent">
-      <table id="tablex">
-      </table>
+      <table id="tablex"></table>
     </main>
 
     <footer>
