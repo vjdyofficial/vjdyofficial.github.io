@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <link rel="stylesheet" href="./src/fonts.css" title="Fonts" />
+    <script src="./store.js"></script>
+    <link rel="icon" href="./favicon.ico">
+    <title>VJDY Official Assets Store</title>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav_layout">
+        <span>
+          <button
+            type="button"
+            class="back-button"
+            onclick="
+              history.length > 1
+                ? history.back()
+                : (window.location.href = window.location.origin)
+            ">
+            <img
+              src="./assets/icons/arrow_back.svg"
+              class="tint"
+              alt="Instagram" />
+          </button>
+          <img
+            alt="Logo"
+            src="./assets/logo/officiallogo.svg"
+            height="32px"
+            style="cursor: pointer; -webkit-user-drag: auto"
+            onclick="window.location.href = window.location.origin" />
+          <h2>Asset Store</h2>
+        </span>
+      </div>
+    </nav>
+
+    <main>
+      <div id="store_parent">
+      </div>
+    </main>
+
+    <footer>
+      <script src="src/footer.js"></script>
+    </footer>
+  </body>
+</html>

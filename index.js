@@ -1,6 +1,7 @@
 const time = document.getElementById("time");
 const date = document.getElementById("date");
-const event = document.getElementById("event");
+const event_dating = document.getElementById("event");
+const creatorStatus = document.getElementById("creator-status");
 
 const EVENTS = [
   {
@@ -61,15 +62,15 @@ function getManilaDate() {
  * ==========================================
  */
 
-function getNextEventDate(eventInfo, now) {
+function getNextEventDate(event_datingInfo, now) {
   let year = now.getFullYear();
 
-  let target = new Date(year, eventInfo.month - 1, eventInfo.day, 0, 0, 0);
+  let target = new Date(year, event_datingInfo.month - 1, event_datingInfo.day, 0, 0, 0);
 
-  // If this year's event has already passed,
+  // If this year's event_dating has already passed,
   // schedule it for next year.
   if (target < now) {
-    target = new Date(year + 1, eventInfo.month - 1, eventInfo.day, 0, 0, 0);
+    target = new Date(year + 1, event_datingInfo.month - 1, event_datingInfo.day, 0, 0, 0);
   }
 
   return target;
@@ -84,12 +85,12 @@ function getNextEventDate(eventInfo, now) {
 function getNextEvent(now) {
   let nextEvent = null;
 
-  for (const eventInfo of EVENTS) {
-    const target = getNextEventDate(eventInfo, now);
+  for (const event_datingInfo of EVENTS) {
+    const target = getNextEventDate(event_datingInfo, now);
 
     if (!nextEvent || target < nextEvent.date) {
       nextEvent = {
-        ...eventInfo,
+        ...event_datingInfo,
         date: target,
       };
     }
@@ -163,6 +164,27 @@ function getSpecialMessage(now) {
 function updateVJDYClock() {
   const now = getManilaDate();
 
+  const currentTime = now.toLocaleTimeString("en-PH", {
+    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const currentHour = now.getHours();
+  let creatorStatusText = "Creator is active.";
+
+  if (currentHour >= 22) {
+    creatorStatusText = "Creator is relaxing.";
+  } else if (currentHour >= 0 && currentHour < 5) {
+    creatorStatusText = "Creator is inactive.";
+  } else if (currentHour === 5) {
+    creatorStatusText = "Creator is inactive.";
+  } else if (currentHour >= 6 && currentHour < 22) {
+    creatorStatusText = "Creator is active.";
+  }
+
+  creatorStatus.textContent = `${creatorStatusText}`;
+
   /*
    * Manila TIME
    */
@@ -188,8 +210,8 @@ function updateVJDYClock() {
   const specialMessage = getSpecialMessage(now);
 
   if (specialMessage) {
-    if (event) {
-      event.textContent = specialMessage;
+    if (event_dating) {
+      event_dating.textContent = specialMessage;
     }
 
     return;
@@ -200,7 +222,7 @@ function updateVJDYClock() {
    */
   const nextEvent = getNextEvent(now);
 
-  if (!nextEvent || !event) {
+  if (!nextEvent || !event_dating) {
     return;
   }
 
@@ -228,7 +250,7 @@ function updateVJDYClock() {
   if (christmasDifference > 0 && christmasDifference <= hundredDays) {
     const christmasCountdown = formatCountdown(christmasDifference);
 
-    event.textContent = `🎄 Christmas Countdown: ${christmasCountdown}`;
+    event_dating.textContent = `🎄 ${christmasCountdown} until Christmas!`;
 
     return;
   }
@@ -236,7 +258,7 @@ function updateVJDYClock() {
   /*
    * NORMAL EVENT COUNTDOWN
    */
-  event.textContent = `${nextEvent.name}: ${countdown}`;
+  event_dating.textContent = `${nextEvent.name}: ${countdown}`;
 }
 
 /*

@@ -1,0 +1,87 @@
+[
+  {
+    "category": "Sound Presets",
+    "items": [
+      {
+        "image": "images/c291bmRwcmVzZXQx.png",
+        "title": "Directwave Sound Presets",
+        "description": "Enjoy with our library of Sound Presets to use for both FL Studio PC and Mobile with Directwave!",
+        "link": "https://github.com/vjdyofficial/VJDYStore/releases/tag/dwp-flstudiopreset"
+      },
+      {
+        "image": "images/c291bmRwcmVzZXQy.png",
+        "title": "Samples Sound Presets",
+        "description": "Enjoy with our library of Samples Sound Presets to use for both FL Studio PC and Mobile!",
+        "link": "https://github.com/vjdyofficial/VJDYStore/releases/tag/samples-soundpreset"
+      }
+    ]
+  },
+  {
+    "category": "Templates",
+    "items": [
+      {
+        "image": "images/dGVtcGxhdGVzXzAy.png",
+        "title": "Instagram Story Assets",
+        "description": "Download our Instagram Story Assets! not just for Instagram, you can use on your video editing apps!",
+        "link": "https://github.com/vjdyofficial/VJDYStore/releases/tag/igstory-asset"
+      },
+      {
+        "image": "images/dGVtcGxhdGVzXzAx.png",
+        "title": "Motion Graphics Template for Adobe Premiere Pro",
+        "description": "Enjoy a variety of templates to use in your next editing with Premiere Pro!",
+        "link": "https://github.com/vjdyofficial/VJDYStore/releases/tag/premierepro-mogrt"
+      }
+    ]
+  },
+  {
+    "category": "SurvivalCraft for Windows",
+    "items": [
+      {
+        "image": "images/dGVtcGxhdGVzXzAz.png",
+        "title": "2.3 - APPX",
+        "description": "Use Batch File to install SurvivalCraft2. Must put into the secure directory in order to not delete it accidentally.",
+        "link": "https://github.com/vjdyofficial/VJDYStore/blob/main/SurvivalCraft2/Survivalcraft2.rar?raw=true"
+      },
+      {
+        "image": "images/dGVtcGxhdGVzXzAz.png",
+        "title": "2.4 API",
+        "description": "This is the modded version of SurvivalCraft with tons of mods that can access with both Chinese and Original Content Community. Requires .NET 9.0 if you try to open it.",
+        "link": "https://github.com/vjdyofficial/VJDYStore/blob/main/SurvivalCraft2/SurvivalcraftAPI_1.80-1.7z?raw=true"
+      }
+    ]
+  },
+  {
+    "category": "Original Artworks",
+    "items": [
+      {
+        "image": "images/YXJ0d29ya19vcmlnaW5hbF8wMQ==.png",
+        "title": "this is kim, my verycute bff",
+        "description": "A friend that goes nowhere with her bag and a large of log wood until she found new home.",
+        "link": "https://archive.org/details/verycutebff_of_vjdyofficial"
+      },
+      {
+        "image": "images/YXJ0d29ya19vcmlnaW5hbF8wMg==.png",
+        "title": "Faraway",
+        "description": "Feels like you've miss each other since you've been too far away...",
+        "link": "https://archive.org/details/faraway-layouts"
+      }
+    ]
+  },
+  {
+    "category": "Loopable Music",
+    "items": [
+      {
+        "image": "images/bG9vcGFibGVfbXVzaWNfMDE=.png",
+        "title": "MegaMan Battle Network 6 Loopable Edition by CAPCOM",
+        "description": "This is a clean, and loopable version of MegaMan Battle Network 6 official soundtrack!",
+        "link": "https://archive.org/details/mmbn6-loopable"
+      },
+      {
+        "image": "images/bG9vcGFibGVfbXVzaWNfMDI=.png",
+        "title": " Style Boutique DS Loopable Edition by Nintendo, synSophia",
+        "description": "The loopable version of Style Savvy OST by Atsuhiro Motoyama",
+        "link": "https://archive.org/details/stylesavvy-ds-loopable"
+      }
+    ]
+  }
+]
