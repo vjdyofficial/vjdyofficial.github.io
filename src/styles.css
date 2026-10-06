@@ -72,6 +72,16 @@ body {
   scrollbar-color: var(--background) var(--strokecolor);
 }
 
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  background-color: #242424;
+  width: calc(100% + 24px);
+  height: 250px;
+  z-index: -1;
+}
+
 @media only screen and (max-width: 800px) {
   body {
     zoom: 0.85;
@@ -88,8 +98,6 @@ header {
   background-image: var(--background-image, url(../assets/bg.webp));
   background-position: center;
   background-size: cover;
-  margin-top: -100px;
-  padding-top: 100px;
   padding-bottom: 20px;
 }
 
