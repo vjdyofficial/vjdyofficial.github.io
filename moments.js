@@ -1,6 +1,7 @@
 function createPreviewDialog(imageSrc, item) {
   const dialog = document.createElement("dialog");
   dialog.classList.add("moment-preview-dialog");
+  dialog.style.setProperty("--moment-preview-bg", `url(${imageSrc})`);
 
   const previewContainer = document.createElement("div");
   previewContainer.classList.add("moment-preview-container");

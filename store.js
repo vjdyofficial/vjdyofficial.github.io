@@ -72,7 +72,7 @@ async function API_STORE_GET() {
 
     category.items.forEach((item) => {
       const moment = document.createElement("div");
-      moment.className = "moments_main";
+      moment.className = "store_main";
       moment.addEventListener("click", () => {
         createPreviewDialog(image.src, item, heading.textContent);
       });
