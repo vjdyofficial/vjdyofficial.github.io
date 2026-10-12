@@ -5,31 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../src/styles.css" />
     <link rel="stylesheet" href="../src/fonts.css" title="Fonts" />
+    <script src="../src/core.js" defer></script>
     <title>Frequently Asked Questions</title>
   </head>
 
   <body>
     <nav>
-      <button
-        type="button"
-        class="back-button"
-        onclick="
-          history.length > 1
-            ? history.back()
-            : (window.location.href = window.location.origin)
-        ">
+      <div class="nav-default">
+        <button
+          type="button"
+          class="back-button"
+          onclick="
+            history.length > 1
+              ? history.back()
+              : (window.location.href = window.location.origin)
+          ">
+          <img
+            src="../assets/icons/arrow_back.svg"
+            class="tint"
+            alt="Instagram" />
+          <span>Navigate Up</span>
+        </button>
         <img
-          src="../assets/icons/arrow_back.svg"
-          class="tint"
-          alt="Instagram" />
-        <span>Navigate Up</span>
-      </button>
-      <img
-        alt="Logo"
-        src="../assets/logo/brand.svg"
-        height="32px"
-        style="cursor: pointer; -webkit-user-drag: auto"
-        onclick="window.location.href = window.location.origin" />
+          alt="Logo"
+          src="../assets/logo/brand.svg"
+          height="32px"
+          style="cursor: pointer; -webkit-user-drag: auto"
+          onclick="window.location.href = window.location.origin" />
+      </div>
     </nav>
     <header>
       <div class="MNS_AREA_1">
@@ -134,9 +137,9 @@
         <div class="info_sub">
           <h4>What webpage deployment is used?</h4>
           <small>
-            The website is deployed using GitHub Pages and deployment
-            setup that allows the platform to serve its webpages, media, and
-            supporting resources over the web.
+            The website is deployed using GitHub Pages and deployment setup that
+            allows the platform to serve its webpages, media, and supporting
+            resources over the web.
           </small>
         </div>
       </div>
@@ -146,10 +149,10 @@
         <div class="info_sub">
           <h4>What design language does the website use?</h4>
           <small>
-            The website uses a modern, clean interface called Monosource inspired by contemporary
-            desktop and web design. It combines simple layouts, cards, spacing,
-            typography, transparency, and responsive components to create a
-            consistent experience across the platform.
+            The website uses a modern, clean interface called Monosource
+            inspired by contemporary desktop and web design. It combines simple
+            layouts, cards, spacing, typography, transparency, and responsive
+            components to create a consistent experience across the platform.
           </small>
         </div>
       </div>
@@ -162,7 +165,8 @@
             The website uses dedicated SVG icons throughout its interface. These
             icons are stored as scalable vector graphics, allowing them to
             remain sharp at different sizes while keeping the interface
-            lightweight and consistent. The icon sets are called Material Symbols.
+            lightweight and consistent. The icon sets are called Material
+            Symbols.
           </small>
         </div>
       </div>
@@ -173,9 +177,9 @@
           <h4>What fonts are used on the website?</h4>
           <small>
             The website uses web and system fonts selected to provide a clean
-            and readable interface. The font we used here is Inconsolata,
-            Roboto Mono, and Roboto in font variation to ensure the set of width
-            with tons of delicious settings.
+            and readable interface. The font we used here is Inconsolata, Roboto
+            Mono, and Roboto in font variation to ensure the set of width with
+            tons of delicious settings.
           </small>
         </div>
       </div>

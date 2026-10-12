@@ -45,6 +45,7 @@ const loadVideos = () => {
       videos.forEach((video) => {
         const row = tableBody.insertRow();
         const cell = row.insertCell();
+        cell.id = "qwrknhqwq352sd"
 
         // Movie icon
         const icon = document.createElement("img");
@@ -90,6 +91,7 @@ const loadVideos = () => {
         streamButton.target = "_blank";
 
         streamButton.rel = "noopener noreferrer";
+        streamButton.title = "Stream Video"
 
         streamButton.innerHTML = `
           <img
@@ -97,7 +99,6 @@ const loadVideos = () => {
             class="tint"
             alt=""
           />
-          <span>Stream</span>
         `;
 
         streamButton.setAttribute(
@@ -119,6 +120,7 @@ const loadVideos = () => {
         downloadButton.target = "_blank";
 
         downloadButton.rel = "noopener noreferrer";
+        downloadButton.title = "Download Video"
 
         downloadButton.innerHTML = `
           <img
@@ -126,7 +128,6 @@ const loadVideos = () => {
             class="tint"
             alt=""
           />
-          <span>Download</span>
         `;
 
         downloadButton.setAttribute(

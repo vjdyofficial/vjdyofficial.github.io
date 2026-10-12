@@ -115,6 +115,7 @@ async function API_MUSIC_GET(id) {
 
       cell.colSpan = 3;
       cell.style.display = "table-cell";
+      cell.id = "qwrknhqwq352sd"
 
       /*
        * Create music information line
@@ -176,9 +177,18 @@ async function API_MUSIC_GET(id) {
                     type: "image/webp",
                   },
                 ]
-              : [],
+              : [
+                  {
+                    src: "./assets/noalbum.svg",
+                    type: "image/webp",
+                  },
+                ],
           });
         }
+
+        document.getElementById("artwork").style.backgroundImage = picture.includes("null")
+          ? `url('./assets/noalbum.svg')`
+          : `url("${new URL(picture, document.baseURI).href}")`;
 
         fileformat = fileName;
         audio.src = url;
@@ -196,7 +206,9 @@ async function API_MUSIC_GET(id) {
             );
           }
 
+          alert('The download is ready!')
           BLOB_LINK_SRC = await response.blob();
+          
         } catch (error) {
           console.error("Unable to prepare the track download:", error);
         }
@@ -226,13 +238,17 @@ async function API_MUSIC_GET(id) {
 
 if (AUDIOPLAYER_DOWNLOAD && musicPlayer) {
   AUDIOPLAYER_DOWNLOAD.addEventListener("click", async () => {
-    if (!BLOB_LINK_SRC) return;
+    if (!BLOB_LINK_SRC) {
+      alert('There is no download link yet!')
+      return;
+    };
 
     try {
       const objectUrl = URL.createObjectURL(BLOB_LINK_SRC);
       const link = document.createElement("a");
       link.href = objectUrl;
       link.download = fileformat;
+      alert('Downloading content...')
       link.click();
     } catch (error) {
       console.error("Unable to download the current track:", error);
@@ -312,6 +328,17 @@ if (musicPlayer) {
     }
   });
 
+  AUDIOPLAYER_PLAYBTN.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if (!musicPlayer.paused) {
+      musicPlayer.pause();
+      musicPlayer.currentTime = 0;
+      musicPlayer.src = "";
+      BLOB_LINK_SRC = null;
+      alert('Music stopped.')
+    }
+  });
+
   musicPlayer.addEventListener("play", () => setPlayerState(true));
   musicPlayer.addEventListener("pause", () => setPlayerState(false));
   musicPlayer.addEventListener("ended", () => setPlayerState(false));
@@ -322,8 +349,28 @@ if (musicPlayer) {
   updatePlayerProgress();
 }
 
-const API_MUSICFETCH = (e) => {
-  window.identifier = document.getElementById("API_MUSIC_CATEGORY")?.value;
+musicPlayer.preservesPitch = false;
+
+const API_MUSIC_CATEGORY = document.getElementById("API_MUSIC_CATEGORY");
+const libraryFromUrl = new URLSearchParams(window.location.search).get(
+  "library",
+);
+
+if (libraryFromUrl) {
+  window.identifier = libraryFromUrl;
+  if (API_MUSIC_CATEGORY) API_MUSIC_CATEGORY.value = libraryFromUrl;
+} else {
+  const url = new URL(window.location.href);
+  url.searchParams.set("library", window.identifier);
+}
+
+const API_MUSICFETCH = () => {
+  window.identifier = API_MUSIC_CATEGORY?.value || "2026";
+
+  const url = new URL(window.location.href);
+  url.searchParams.set("library", window.identifier);
+  window.history.replaceState(null, "", url);
+
   API_MUSIC_GET(window.identifier);
 };
 

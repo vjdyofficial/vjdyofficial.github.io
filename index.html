@@ -7,78 +7,81 @@
     <link rel="stylesheet" href="./src/fonts.css" title="Fonts" />
     <link rel="icon" href="./favicon.ico" />
     <script src="./index.js" defer></script>
+    <script src="./src/core.js" defer></script>
     <title>VJDY Official Pictures</title>
   </head>
 
   <body>
     <nav>
-      <img alt="Logo" src="./assets/logo/officiallogo.svg" height="56px" />
-      <div>
-        <h6 style="margin: 4px">Follow vjdyofficial on</h6>
-        <span>
-          <a
-            href="https://github.com/vjdyofficial"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="../assets/icons/github.svg"
-              class="tint"
-              alt="Instagram" />
-          </a>
-          <a
-            href="https://instagram.com/vjdyofficial"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="../assets/icons/mdi-instagram.svg"
-              class="tint"
-              alt="Instagram" />
-          </a>
-          <a
-            href="https://threads.com/vjdyofficial"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="../assets/icons/mdi-threads.svg"
-              class="tint"
-              alt="Instagram" />
-          </a>
-          <a
-            href="https://x.com/vjdyofficial"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="../assets/icons/mdi-x.svg"
-              class="tint"
-              alt="Instagram" /> </a
-          ><a
-            href="https://tiktok.com/@vjdyofficial"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="../assets/icons/tiktok.svg"
-              class="tint"
-              alt="Instagram" />
-          </a>
-          <a
-            href="https://youtube.com/vjdyofficial"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="../assets/icons/mdi-youtube.svg"
-              class="tint"
-              alt="Instagram" />
-          </a>
-          <a
-            href="https://www.roblox.com/users/3914320041/profile"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="../assets/icons/mdi-roblox.svg"
-              class="tint"
-              alt="Instagram" />
-          </a>
-        </span>
+      <div class="nav-default">
+        <img alt="Logo" src="./assets/logo/officiallogo.svg" height="56px" />
+        <div>
+          <h6 style="margin: 4px">Follow vjdyofficial on</h6>
+          <span>
+            <a
+              href="https://github.com/vjdyofficial"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="../assets/icons/github.svg"
+                class="tint"
+                alt="Instagram" />
+            </a>
+            <a
+              href="https://instagram.com/vjdyofficial"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="../assets/icons/mdi-instagram.svg"
+                class="tint"
+                alt="Instagram" />
+            </a>
+            <a
+              href="https://threads.com/vjdyofficial"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="../assets/icons/mdi-threads.svg"
+                class="tint"
+                alt="Instagram" />
+            </a>
+            <a
+              href="https://x.com/vjdyofficial"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="../assets/icons/mdi-x.svg"
+                class="tint"
+                alt="Instagram" /> </a
+            ><a
+              href="https://tiktok.com/@vjdyofficial"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="../assets/icons/tiktok.svg"
+                class="tint"
+                alt="Instagram" />
+            </a>
+            <a
+              href="https://youtube.com/vjdyofficial"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="../assets/icons/mdi-youtube.svg"
+                class="tint"
+                alt="Instagram" />
+            </a>
+            <a
+              href="https://www.roblox.com/users/3914320041/profile"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="../assets/icons/mdi-roblox.svg"
+                class="tint"
+                alt="Instagram" />
+            </a>
+          </span>
+        </div>
       </div>
     </nav>
 
@@ -87,7 +90,8 @@
         <h1>
           Make <br />
           Things <br />
-          Possible</h1>
+          Possible
+        </h1>
       </div>
       <div class="MNS_AREA_TICKERTEXT">
         <div class="ticker-track">
@@ -170,15 +174,17 @@
         </div>
       </div>
       <div class="info_main">
-        <img alt="Icon" src="./assets/pageicons/9.svg" width="48px" />
+        <img alt="Icon" src="./assets/pageicons/12.svg" width="48px" />
         <div class="info_sub">
-          <h2>NEWS</h2>
-          <small>Visit our Blogger Page for the news</small>
-          <button
-            type="button"
-            onclick="window.open('https://vjdyofficialpictures.blogspot.com')">
-            Visit Page
-          </button>
+          <h2>CODES TO SHARE</h2>
+          <small>I've AI and handmade code for you to use!</small>
+          <span>
+            <button
+              type="button"
+              onclick="window.location.href = './docs/codes.html'">
+              Go >>>
+            </button>
+          </span>
         </div>
       </div>
     </main>
@@ -220,7 +226,14 @@
             >An open-source real-time digial audio workstation for
             events!</small
           >
-          <button type="button">Download</button>
+          <span>
+            <button type="button">Download</button>
+            <button
+              type="button"
+              onclick="window.location.href = './docs/sfxstudio.html'">
+              User Guide
+            </button>
+          </span>
         </div>
       </div>
     </main>
@@ -235,7 +248,9 @@
             A Comedy Podcast that describe and explain every topic, compare
             things if any, and Story Time powered by ChatGPT!</small
           >
-          <button onclick="window.location.href = './docs/radyobarayti.html'">Go >>></button>
+          <button onclick="window.location.href = './docs/radyobarayti.html'">
+            Go >>>
+          </button>
         </div>
       </div>
       <div class="info_main">
@@ -246,7 +261,9 @@
             >A YouTube Show that recaps events and occasion happening on this
             day.</small
           >
-          <button onclick="window.location.href = './docs/vjdydirect.html'">Go >>></button>
+          <button onclick="window.location.href = './docs/vjdydirect.html'">
+            Go >>>
+          </button>
         </div>
       </div>
       <div class="info_main">
@@ -259,7 +276,10 @@
             weather. It has a mix of Pokémon, Megaman BN series and many more
             popular video games such as Among Us, Minecraft, and Roblox.
           </small>
-          <button>Go >>></button>
+          <button
+            onclick="window.location.href = './docs/echoridgedelora.html'">
+            Go >>>
+          </button>
         </div>
       </div>
     </main>
@@ -305,6 +325,18 @@
             type="button"
             onclick="window.open('https://discord.gg/EJHm6J2H5C')">
             Join Now
+          </button>
+        </div>
+      </div>
+      <div class="info_main">
+        <img alt="Icon" src="./assets/pageicons/9.svg" width="48px" />
+        <div class="info_sub">
+          <h2>NEWS</h2>
+          <small>Visit our Blogger Page for the news</small>
+          <button
+            type="button"
+            onclick="window.open('https://vjdyofficialpictures.blogspot.com')">
+            Visit Page
           </button>
         </div>
       </div>

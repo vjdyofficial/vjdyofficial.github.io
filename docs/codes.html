@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/styles.css" />
+    <link rel="stylesheet" href="../src/fonts.css" title="Fonts" />
+    <script src="../src/core.js" defer></script>
+    <title>Codes 101 - VJDY Official Pictures</title>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-default">
+        <button
+          type="button"
+          class="back-button"
+          onclick="
+            history.length > 1
+              ? history.back()
+              : (window.location.href = window.location.origin)
+          ">
+          <img
+            src="../assets/icons/arrow_back.svg"
+            class="tint"
+            alt="Instagram" />
+          <span>Navigate Up</span>
+        </button>
+        <img
+          alt="Logo"
+          src="../assets/logo/brand.svg"
+          height="32px"
+          style="cursor: pointer; -webkit-user-drag: auto"
+          onclick="window.location.href = window.location.origin" />
+      </div>
+    </nav>
+    <header>
+      <div class="MNS_AREA_1">
+        <h1>
+          Code to<br />
+          share
+        </h1>
+        <h2>I've collected code for you to check out!</h2>
+      </div>
+    </header>
+
+    <h1 class="MAIN_PAGE_HEADLINE">JavaScript Functions</h1>
+
+    <main class="portfolio">
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Format Time from Number</h4>
+          <br />
+          <textarea
+            readonly
+            rows="3"
+            onclick="this.select()"
+            style="
+              width: 100%;
+              height: 200px;
+              resize: none;
+              padding: 8px;
+              font-family: monospace;
+            ">
+function CODE_FORMATTIME(seconds) {
+    if (isNaN(seconds) || seconds <= 0) return "00:00";
+
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+
+    const mm = m.toString().padStart(2, "0");
+    const ss = s.toString().padStart(2, "0");
+
+    if (h > 0) {
+        const hh = h.toString().padStart(2, "0");
+        return `${hh}:${mm}:${ss}`;
+    } else {
+        return `${mm}:${ss}`;
+    }
+}
+</textarea
+          >
+
+          <br />
+          <small>
+            This used to convert any value that represents seconds into the
+            correct time format.
+          </small>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Timecode To Frames</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+function CODE_TIMECODE_TOFPS(timecode, fps) {
+    const parts = timecode.split(":");
+
+    if (parts.length !== 3) {
+        throw new Error("Invalid format. Use HH:MM:SS.SSS");
+    }
+
+    const hours = parseInt(parts[0], 10);
+    const minutes = parseInt(parts[1], 10);
+    const seconds = parseFloat(parts[2]);
+    const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+    const frames = Math.round(totalSeconds * fps);
+    return frames;
+}
+</textarea
+          >
+          <br />
+          <small>
+            This convert from timecode into how many frames you need based on
+            your FPS set.
+          </small>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Bytes to Size</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+function CODE_BYTE_TOSIZE(bytes) {
+    if (bytes === 0) return "0 B";
+    const units = ["B", "KB", "MB", "GB", "TB", "PB", "EB"];
+    const k = 1024;
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    const value = bytes / Math.pow(k, i);
+    return `${value.toFixed(2)} ${units[i]}`;
+}
+</textarea
+          >
+          <br />
+          <small>
+            This formats the byte value into the correct file size format.
+          </small>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Decimal to Decibels</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+function CODE_GAIN_TODECIBELS(gain) {
+  if (gain <= 0) {
+    return "-60.0dB";
+  }
+
+  const val = 20 * Math.log10(gain);
+
+  return `${val === Infinity ? "inf" : val.toFixed(1) + "dB"}`;
+}
+</textarea
+          >
+          <br />
+          <small> This converts value 0-1 to decibels (-60 to 0). </small>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Remove Context Menu Exntirely</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+document.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+});
+</textarea
+          >
+          <br />
+          <small>
+            This removes the context menu entirely. This avoids option to show
+            for print, open DevTools and more. Recommened for Electron apps.
+          </small>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Block Navigation to other websites</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+navigation.navigate = (...args) => {
+  console.warn(
+    "This feature is not allowed to navigate to other websites"
+  );
+};
+</textarea
+          >
+          <br />
+          <small>
+            This removes the ability to navigate to other website in some
+            specific app built with Electron.
+          </small>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Block Navigation to other websites</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+navigation.navigate = (...args) => {
+  console.warn(
+    "This feature is not allowed to navigate to other websites"
+  );
+};
+</textarea
+          >
+          <br />
+          <small>
+            This removes the ability to navigate to other website in some
+            specific app built with Electron.
+          </small>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Create Stereo Widening Effect.</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+function createStereoWidth(ctx, left, right) {
+    const splitter = ctx.createChannelSplitter(8);
+    const merger = ctx.createChannelMerger(2);
+    const merger2 = ctx.createChannelMerger(2);
+    // Gains
+    const gainL = ctx.createGain();
+    const gainR = ctx.createGain();
+    const invertL = ctx.createGain();
+    const invertR = ctx.createGain();
+    gainL.gain.value = 0;
+    gainR.gain.value = 0;
+    invertL.gain.value = 0;
+    invertR.gain.value = 0;
+    // Split stereo
+    splitter.connect(gainL, left);
+    splitter.connect(gainR, right);
+    splitter.connect(invertL, left);
+    splitter.connect(invertR, right);
+    // Normal mix
+    gainL.connect(merger, 0, 0);
+    gainR.connect(merger, 0, 1);
+    // Inverted mix
+    invertR.connect(merger2, 0, 0);
+    invertL.connect(merger2, 0, 1);
+
+    return {
+        input: splitter,
+        output: {
+            normal: merger,
+            cancel: merger2
+        },
+        control: (value, multiplier) => {
+            const norm = value * multiplier;
+
+            gainL.gain.value = (norm);
+            gainR.gain.value = (norm);
+            const cancel = -(norm);
+            invertL.gain.value = cancel;
+            invertR.gain.value = cancel;
+        }
+    };
+}
+</textarea
+          >
+          <br />
+          <small>
+            This special code used to create stereo widening effect, this
+            inverts the gain and must called Side Input.
+          </small>
+          <br />
+          <span>
+            Requires
+            <code>AudioContext</code>
+          </span>
+        </div>
+      </div>
+
+      <div class="info_main">
+        <div class="info_sub">
+          <h4>Use your specific world time.</h4>
+          <br />
+          <textarea readonly rows="3" onclick="this.select()" class="textget">
+function getManilaDate() {
+  const now = new Date();
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Manila",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+  const parts = formatter.formatToParts(now);
+  const values = Object.fromEntries(
+    parts
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value]),
+  );
+
+  return new Date(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    Number(values.hour),
+    Number(values.minute),
+    Number(values.second),
+  );
+}
+</textarea
+          >
+          <br />
+          <small>
+            This special code is used on this website to represent the time
+            based on the server's location. useful for seeing time and date from
+            the owner of this website.
+          </small>
+          <br />
+          <span>
+            Use
+            <code>const now = getManilaDate();</code>
+          </span>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <script src="../src/footer.js"></script>
+    </footer>
+  </body>
+</html>

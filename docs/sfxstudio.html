@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VJDY FM Sound Effects Studio User Guide</title>
+    <link rel="stylesheet" href="../src/mns.css">
+    <link rel="stylesheet" href="../src/fonts.css">
+    <link rel="stylesheet" href="about.css">
+    <script src="../src/core.js" defer></script>
+</head>
+
+<body class="transparent scrollable margin scrollbar" data-layout="center">
+    <div class="monosource_wrapper_about" id="scrollhoriz">
+        <div class="monosource-content">
+            <div class="monosource-content-wrap widthfill">
+                <h1>Audio Basics</h1>
+                <h2>Categorization of Sampler Buttons</h2>
+                <blockquote>
+                    The sound buttons are colour-coded to help you quickly identify the type of sound effect.
+                    Each colour represents a different category, making it easier to find the sound you need. here are
+                    the
+                    color legends for Sound Buttons&colon;
+                    <hr class="spacerelement">
+                    <span class="monosource_span">
+                        <span class="circle24px fallback"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">Default, Uncategorized, Fallback or By Contributions</span>
+                    </span>
+
+                    <span class="monosource_span">
+                        <span class="circle24px category_speech_color"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">Speeches</span>
+                    </span>
+
+                    <span class="monosource_span">
+                        <span class="circle24px category_default_color"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">Commonly Used in Programmes</span>
+                    </span>
+
+                    <span class="monosource_span">
+                        <span class="circle24px category_fm_color"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">FM and DJ Tapers</span>
+                    </span>
+
+                    <span class="monosource_span">
+                        <span class="circle24px category_score_color"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">Scores</span>
+                    </span>
+
+                    <span class="monosource_span">
+                        <span class="circle24px category_musicscore_color"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">Music Scores</span>
+                    </span>
+
+                    <span class="monosource_span">
+                        <span class="circle24px category_announcement_color"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">Announcement Tones</span>
+                    </span>
+
+                    <span class="monosource_span">
+                        <span class="circle24px category_orchhit_color"></span>
+                        <div class="spacerelement">
+                            <!-- This space is for layout purposes -->
+                        </div>
+                        <span class="legend-text">Orchestra and Instrumental Hits</span>
+                    </span>
+                    <hr class="spacerelement">
+                    The colors of the sound buttons might be different because the app was following the
+                    color scheme which the colors might have dark and light tint.
+                </blockquote>
+                <h2>No Content available on Sampler Workbench</h2>
+                <blockquote>
+                    If the sound buttons are not showing, means that the sound effects are not loaded yet. Here are the
+                    following tips&colon;
+                    <hr class="spacerelement">
+                    <details name="install-guide" id="installguide-auto">
+                        <hr class="spacerelement">
+                        <summary>Procedures</summary>
+                        <p>To download automatically without visiting GitHub to download the SFX Pack,</p>
+                        <hr class="spacerelement">
+                        <code>Go to Sampler <img alt="iconguide" class="topbar_marginleft_btn logo-onprimary" src="icons/codicons/megaphone.svg"></code><br>
+                        <img src="images/help/sampler/01.png" alt="SFX">
+                        <hr class="spacerelement">
+                        <code>Click on Install or Update Pack.</code><br>
+                        <img src="images/help/sampler/02.png" alt="SFX">
+                        <hr class="spacerelement">
+                        <img src="images/help/sampler/03.png" alt="SFX" width="100%">
+                        <br>
+                        <p>
+                            You will see the confirmation so you can update or download. click
+                            <code>Yes</code> to confirm.<br><br>
+                            This will download the pack from the separate Github Repository. Some
+                            sound buttons might be erased to ensure the stable function. and will loaded again once it's
+                            finsihed.
+                        </p>
+                    </details>
+                </blockquote>
+                <h2>Can't hear audio</h2>
+                <blockquote>
+                    If the sound is not playing, it may be due to the following reasons:<br>
+                    <ul>
+                        <li>AudioContext was paused.</li>
+                        <li>Your device's volume is muted or too low.</li>
+                        <li>There is a technical issue with the app.</li>
+                    </ul>
+                    <br>
+                    Technically the AudioContext don't have issues anymore on audio routing which is already fixed
+                    before 3.x versions.
+                </blockquote>
+                <h2>Import Media</h2>
+                <blockquote>
+                    Go to: <code>Options > Import Media</code>
+                    Choose the supported file types, and media file you want to play or
+                    just drag the supported file to the app.
+
+                    If the imports detects as Audio or Video, it will show you the
+                    dialog to decide which Deck will import. If the file is MIDI, it will go
+                    straight to the MIDI workbench.
+                </blockquote>
+                <h2>Setup Input Device to be live</h2>
+                <blockquote>
+                    Go to: <code>Settings > Audio > Input and Output</code>
+                    <br><br>
+                    Choose input device on Return A, and Return B.
+                    <br><br>
+                    You can enable input to Recorder if you want to bring the input device
+                    to be recorded using the Recorder feature.
+                </blockquote>
+                <h2>Audio Buffer issue such as choppy</h2>
+                <blockquote>
+                    Recent updates of Sound Effects Studio is getting issue when it comes to
+                    Audio Buffering issue which is choppy audio on some devices 
+                    because of the real-time UI updates that
+                    is using <code>setInterval();</code> code.
+                    <br><br>
+                    To fix this, go to: <code>Settings > Audio > AudioContext Properties</code>
+                    <br><br>
+                    Set Latency Hint, Sample Rate, and Latency Amount (if you use custom) as 
+                    much as possible.
+                    <br><br>
+                    Restart is required in order to use the new settings.
+                    <br><br>
+                    This choppy audio is affecting most of mid-range spec laptops or terrible
+                    specs of desktop. So, running this on high-powered desktop or laptop will work
+                    just fine.
+                </blockquote>
+                <h2>FLAC does show Infinity:NaN on other files</h2>
+                <blockquote>
+                    FLAC is a lossless audio codec. It compresses audio without losing any data.
+                    Once the specific FLAC audio file does have STREAMINFO metadata, It will show the proper duration.
+                    If your encoder didn't include STREAMINFO metadata, the duration will
+                    become infinite but the waveform and spectrogram generation will still executed and will show after
+                    the playback!
+                </blockquote>
+                <h2>WebAudio Error</h2>
+                <blockquote>
+                    This happens if your default device has new changes. For some reason,
+                    it will try to play audio to output device that has new settings, but AudioContext
+                    refuses to play live and shows this error instead. You must need to restart app
+                    in order to fix it.
+                </blockquote>
+            </div>
+        </div> 
+        <div class="monosource-content">
+            <div class="monosource-content-wrap widthfill">
+                <h1>MIDI</h1>
+                <h2>About this feature</h2>
+                <blockquote>
+                    This MIDI feature is using WebMIDI API for real time
+                    playback of MIDI Sequence, and play MIDI from
+                    hardware devices.
+                </blockquote>
+                <h2>Setup MIDI Input Device to be live</h2>
+                <blockquote>
+                    Setting up MIDI Input Device is so easy! Just plug your device that
+                    supports MIDI Out, and Sound Effects Studio will automatically connects
+                    the hardware to the app all the way to the hardware or software 
+                    synthesizer installed on your computer!
+                    <br><br>
+                    On Android Phone, you need to set USB option to MIDI in order to connect it.
+                    Some device might not support properly like OPPO Phones, but it works fine
+                    on Samsung Devices.
+                    <br><br>
+                    Be sure to go to <code><img class="logo-onprimary" src="../assets/icons/piano.svg"><hr class="spacerelement2">MIDI</code>
+                    workbench, and press <code><img class="logo-onprimary" src="../assets/icons/midiin.svg"></code> to enable
+                    MIDI In Message.
+                </blockquote>
+                <h2>Sent All Programs</h2>
+                <blockquote>
+                    By pressing this button: <code><img class="logo-onprimary" src="../assets/icons/send.svg"></code>,
+                    The app will force to send all programs by the current tick, useful if instruments are in trouble to change.
+                </blockquote>
+                <h2>Panic MIDI Instances</h2>
+                <blockquote>
+                    By pressing this button: <code><img class="logo-onprimary" src="../assets/icons/piano_offsvg.svg"></code>,
+                    The app will force to send all notes off data to every 16 channels. Recommended to do this if the Synthesizer
+                    can't find Notes off, Sound off, or All Notes off status from MIDI In Message.
+                </blockquote>
+                <h2>Reset MIDI Output</h2>
+                <blockquote>
+                    By pressing this button: <code><img class="logo-onprimary" src="../assets/icons/midiout.svg"></code>,
+                    The app will reset MIDI Output to re-initiate the MIDIAccess Navigator and get the MIDI Devices that
+                    is set by system.
+                </blockquote>
+            </div>
+        </div> 
+        <div class="monosource-content">
+            <div class="monosource-content-wrap widthfill">
+                <h1>Digital TrueSurround</h1>
+                <h2>About this feature</h2>
+                <blockquote>
+                    This app is powered by the new audio system called VJDY Digital
+                    TrueSurround! This audio system is using the PCM S16, S24 or S32 LE
+                    audio codec, which can hear very clear and it supports up to 8 channels.
+                </blockquote>
+                <h2>Channel Support</h2>
+                <blockquote>
+                    It supports <code><b>2.1</b></code> <code>2F/LFE</code>,
+                    <code><b>3.1</b></code> <code>3F/LFE</code>,
+                    <code><b>5.1</b></code> <code>3F2R/LFE</code>, and
+                    <code><b>7.1</b></code> <code>3F2M2R/LFE</code>,
+                </blockquote>
+                <h2>TrueSurround Emulation</h2>
+                <blockquote>
+                    This feature lets you use the 2-channel audio which is the stereo,
+                    to upmix everything into other channels with pre-made effects.
+                    <br><br>>
+                    <code>Center Channel</code> will process
+                    <code><b>Mids and High Only</b></code>,
+                    <code>Subwoofer or LFE</code> will process
+                    <code><b>Low Pass Only</b></code>,
+                    <code>Rear Channel</code> will process
+                    <code><b>Stereo Widening effect, and room reverb effect</b></code>, and
+                    <code>Side Channel</code> will process
+                    <code><b>the far reverb effect.</b></code>
+
+                    <br><br>
+
+                    To access this feature, you may found it on the
+                    <code>Surround</code> panel at the right side bar of the main workspace.<br>
+                    <span class="margin8 decktitle monosource_span">
+                        <span class="mns-text-small monospace_font monosource_span">
+                            <p class="text_shrink_pad textcuebox" id="captionText2">TrueSurround<br>Emulation</p>
+                            <hr class="spacerelement2">
+                            <input type="checkbox" id="SRSEmulationCheckbox" class="monosource_switch_small"
+                                title="Enable TrueSurround Emulation &#10;&#10;This will attempt to create a surround sound&#10;experience using stereo output to ready made effects.">
+                        </span>
+                    </span>
+                </blockquote>
+                <h2>Why we made this?</h2>
+                <blockquote>
+                    The purpose is we do not allowed to use Dolby assets and 
+                    it's logos without the proper license.
+                </blockquote>
+            </div>
+        </div>
+        <div class="monosource-content" aria-details="Workbench">
+            <div class="monosource-content-wrap widthfill">
+                <h1>Workbench</h1>
+                <h2>Sampler</h2>
+                <blockquote>
+                    Play sound effects and music scores on special occasions.
+                    <br><br>
+                    <img src="images/help/workbench/01.png" width="100%">
+                </blockquote>
+                <h2>Program</h2>
+                <blockquote>
+                    You will see the video playing, lyrics and caption cue that
+                    is happening right now. good on output for second display and
+                    first display is a monitor.
+                    <br><br>
+                    <img src="images/help/workbench/02.png" width="100%">
+                </blockquote>
+                <h2>Spectrogram</h2>
+                <blockquote>
+                    You will see artifacts of chords, notes and hisses in the frequency. This is so popular
+                    for finding any hidden drawings and messages.
+                    <br><br>
+                    <img src="images/help/workbench/03.png" width="100%">
+                </blockquote>
+                <h2>BBCode Designer</h2>
+                <blockquote>
+                    Design your presentation powered by BBCode with styling options, animations,
+                    fonts and present it using Teleprompter Panel!
+                    <br><br>
+                    <img src="images/help/workbench/04.png" width="100%">
+                </blockquote>
+                <h2>MIDI</h2>
+                <blockquote>
+                    Play your favorite MIDI Sequence, Track MIDI Events including
+                    channel indicators, and what Instruments and Preset are using,
+                    adjust Pitch and Velocity, also you can play Piano directly!
+                    <br><br>
+                    <img src="images/help/workbench/05.png" width="100%">
+                </blockquote>
+            </div>
+        </div>
+        <div class="monosource-content" aria-details="Left Side Bar">
+            <div class="monosource-content-wrap widthfill">
+                <h1>Left Side Bar</h1>
+                <h2>Media Panel</h2>
+                <blockquote>
+                    You can play videos right here! such as <b>video presentations, 
+                        title cards, backgrounds, etc.
+                    </b> Images are not supported here
+                    unless you have to import the still image video on it.
+                    <br><br>
+                    <img src="images/help/leftsidebar/01.png">
+                    <br><br>
+                    These are the controls to the video to External Visualizer. The 
+                    <code>Cast</code> button will send the video data such as 
+                    Current Time, Source and Speed to the External Visualizer. and the
+                    <code>Swap</code> button will swap 2 sources. It's either Source A or
+                    Source B.
+                    <br><br>
+                    <img src="images/help/leftsidebar/02.png">
+                    <br><br>
+                    This feature is using <code>Broadcast Channel System</code> in
+                    Chromium, which will cause lags on some devices if sending data in real-time while 
+                    low available space memory or higher CPU usage is too often.
+                </blockquote>
+                <h2>Captions Panel</h2>
+                <blockquote>
+                    Import a supported files such as <code>SRT</code> and <code>VTT</code> files.
+                    and you can monitor the <b>Active</b> and <b>Next Cue</b> on it.
+                    <br><br>
+                    <img src="images/help/leftsidebar/03.png">
+                </blockquote>
+                <h2>Teleprompter Panel</h2>
+                <blockquote>
+                    Present your slides that you created using the <b>BBCode Designer</b> feature which you
+                    can find in the workbench (center screen). This is powered by the BBCode Format, with more 
+                    advanced and new format options such as variable font weight, transform scale, stroke and shadow.
+                    <br><br>
+                    <img src="images/help/leftsidebar/04.png">
+                </blockquote>
+            </div>
+        </div>
+        <div class="monosource-content" aria-details="Right Side Bar">
+            <div class="monosource-content-wrap widthfill">
+                <h1>Right Side Bar</h1>
+                <h2>VU Meter</h2>
+                <blockquote>
+                    You will see a radio-alike but digital version of
+                    VU Meter which you will noticed if the audio was
+                    peaking.
+                </blockquote>
+                <h2>Effects and Panel</h2>
+                <blockquote>
+                    <h3>Source</h3>
+                    <p>
+                        You can control the Master Volume, Sample Volume and
+                        each of the Return Volume.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Surround</h3>
+                    <p>
+                        A feature that you can control a gain value of different channels if
+                        the audio channel was specified to the 5.1 and 7.1 Surround.
+                    </p>
+
+                    <hr>
+                    <h4><b>Switch</b></h4>
+                    <h4>Mute Center</h4>
+                    <code>
+                        This will mute the center channel output, which contains
+                        vocals, dialogue, or mono mix in most content.
+                    </code>
+                    <br><br>
+                    <h4>TrueSurround Emulation</h4>
+                    <code>
+                        This will attempt to create a surround sound
+                        experience using stereo output to ready made effects. Take note that 
+                        other audio channels with extra channel like 3-8 will not be able 
+                        to use it.
+                    </code>
+
+                    <hr>
+                    <h4><b>Screens</b></h4>
+                    <h4>Manual</h4>
+                    <code>
+                        Manually adjust the value of diffferent audio channels. You can also
+                        apply preset on below the knobs.
+                    </code>
+                    <br><br>
+                    <h4>Panner</h4>
+                    <code>
+                        Adjusts its value of different audio channels 
+                        based on your applied 3D X and Y Positions, doing this will
+                        overwrite your manual settings but will follow the preset if you
+                        set only the desired channel configuration.
+                    </code>
+                    <br><br>
+                    <h4>Spectator</h4>
+                    <code>
+                        You will see what channel is actually heard on real time at
+                        the 3D workspace, which you can see what channel is actually playing
+                        right now in speaker setup.
+                    </code>
+                </blockquote>
+                <blockquote>
+                    <h3>Mixer</h3>
+                    <p>
+                        Control each volume, gain and pitch in different media sources.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Preamp</h3>
+                    <p>
+                        Adjust the gain volume of audio before it can pass to the
+                        compressor which can reduce clipping later.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Compressor</h3>
+                    <p>
+                        Can limit the volume of the audio clipping which is ideal for
+                        safety to the speakers.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Equalizer</h3>
+                    <p>
+                        Adjust every band frequency in 12 different kilohertz,
+                        from 31.5Hz to 16kHz.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Virtualizer</h3>
+                    <p>
+                        Can enhance the widened stereo as you create a virtual
+                        3D spatial experience. These feature is most common thing in
+                        Poweramp, and AIMP for Desktop. but on this app, has additional
+                        effects including Condense, and Double.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Bass</h3>
+                    <p>
+                        Can enhance the bass which is useful for Fader Effect. it can
+                        only be affected in Stereo. other Surround channels cannot be used
+                        with this effect unless Surround channels are downmixed to Stereo.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Cutoff</h3>
+                    <p>
+                        Can fade, filter, and create a massive fade in, fade out animation
+                        while the host of event or radio anchor was speaking.
+                    </p>
+                </blockquote>
+                <blockquote>
+                    <h3>Reverb</h3>
+                    <p>
+                        Can enhance the environment which is useful for massive 3D crossfeed.
+                        it can only be affected in Stereo. other Surround channels cannot be used
+                        with this effect unless Surround channels are downmixed to Stereo.
+                    </p>
+                </blockquote>
+            </div>
+        </div>
+        <div class="monosource-content" aria-details="Left Side Bar">
+            <div class="monosource-content-wrap widthfill">
+                <h1>Other Panel Bars</h1>
+                <h2>Audio and Media Progress Bar</h2>
+                <blockquote>
+                    Monitor and control the progress of audio, and scroll
+                    and skip to the video along on Media A and B.
+                    <br><br>
+                    <img src="images/help/bars/mediabar.png" width="100%">
+                </blockquote>
+                <h2>Title Bar</h2>
+                <blockquote>
+                    You can access the Menu Bar, monitor the performance of
+                    your computer, audio meter and the visualizer. You can
+                    check the Time and Date Today, and the Weather Today.
+                    <br><br>
+                    <img src="images/help/bars/titlebar.png" width="100%">
+                </blockquote>
+                <h2>Status Bar</h2>
+                <blockquote>
+                    You can see the Session and Underrun Time of the AudioContext,
+                    see recent on-screen display message, battery percentage,
+                    effect indicators such as Bass, Virtualizer, and TrueSurround
+                    Emulation, USB DAC indication, power peak 
+                    and the channel configuration.
+                    <br><br>
+                    <img src="images/help/bars/statusbar.png" width="100%">
+                </blockquote>
+            </div>
+        </div>
+        <div class="monosource-content">
+            <div class="monosource-content-wrap widthfill">
+                <h1>Keyboard Shortcuts</h1>
+                <h2>Global</h2>
+                <blockquote class="widthfill" style="box-sizing: border-box;">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Settings</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">F8</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Developer Console</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">F9</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Toggle Hotkey</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">F10</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Toggle Fullscreen</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">F11</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Audio Panic</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Backspace</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Close App/Dialog</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Alt</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">F4</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Close Dialog or Exit Fullscreen</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Esc</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Decrease Volume</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">&#x2D;</strong>
+                        </span>
+                    </span>
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Increase Volume</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">&#x2B;</strong>
+                        </span>
+                    </span>
+
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">About App</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">K</strong>
+                        </span>
+                    </span>
+
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Execute Oscillator Bleep</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">COMMA</strong>
+                        </span>
+                    </span>
+
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Open Announcement Execution</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">PERIOD</strong>
+                        </span>
+                    </span>
+
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Sample Play by Keybinds</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Q W E R T Y U I O P</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">1 2 3 4 5 6 7 8 9 0</strong>
+                        </span>
+                    </span>
+
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Assign Sampler Button to Keybinds</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">Right Mouse Click to any
+                                sampler.</strong>
+                        </span>
+                    </span>
+
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Play/Pause Audio Decks A-D</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Alt + 1</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">Alt + 2</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">Alt + 3</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">Alt + 4</strong>
+                        </span>
+                    </span>
+
+                    <hr class="spacerelement">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Play/Pause Media Decks A-B</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Alt + 5</strong>
+                            <hr class="spacerelement2">
+                            <strong class="monosource_chip monospace_font_sub">Alt + 6</strong>
+                        </span>
+                    </span>
+                </blockquote>
+                <h2>BBCode Designer</h2>
+                <blockquote style="display:flex; flex-direction:column; gap: 8px; box-sizing: border-box;"
+                    class="widthfill">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Undo on Text Area</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + Z</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Redo on Text Area</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + Y</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Save</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + S</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Save as New</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + Shift + S</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Open</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + O</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Remove Format</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + R</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">New Document</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + N</strong>
+                        </span>
+                    </span>
+                </blockquote>
+                <h2>Program</h2>
+                <blockquote style="display:flex; flex-direction:column; gap: 8px; box-sizing: border-box;"
+                    class="widthfill">
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Show Video Deck A</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + &xlarr;</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Show Video all</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + UpArrow</strong>
+                        </span>
+                    </span>
+                    <span class="mns-tableflex-column-2">
+                        <span class="legend-text">Show Video Deck B</span>
+                        <span class="monosource_span">
+                            <hr class="spacer">
+                            <strong class="monosource_chip monospace_font_sub">Ctrl + &xrarr;</strong>
+                        </span>
+                    </span>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
