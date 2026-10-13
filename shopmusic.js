@@ -201,6 +201,8 @@ async function API_MUSIC_GET(id) {
         audio.play().catch(console.error);
         audio.playbackRate = window.SPEED_DEF;
 
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
         try {
           const response = await fetch(url);
           if (!response.ok) {
@@ -209,8 +211,10 @@ async function API_MUSIC_GET(id) {
               `Track download preparation failed: HTTP ${response.status}`,
             );
           } else {
-            BLOB_LINK_SRC = await response.blob();
-            alert("The download is ready!");
+            if (lastUrl) {
+              BLOB_LINK_SRC = await response.blob();
+              alert("The download is ready!");
+            }
           }
         } catch (error) {
           alert(`Unable to prepare the track download: ${error}`);
@@ -533,4 +537,3 @@ if (VJDY_SELECTSPEED_OPTION && musicPlayer) {
     setPlaybackRateTarget(musicPlayer, val, 2.5, backBoth(1.5));
   });
 }
-
