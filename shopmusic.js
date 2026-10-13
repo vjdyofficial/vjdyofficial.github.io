@@ -4,6 +4,8 @@ let fileformat = "";
 const AUDIOPLAYER_TITLE = document.getElementById("AUDIOPLAYER_TITLE");
 const AUDIOPLAYER_SUB = document.getElementById("AUDIOPLAYER_SUB");
 
+window.SPEED_DEF = 1;
+
 let musicPlayer = document.getElementById("music_player");
 let BLOB_LINK_SRC = null;
 let lastUrl = null;
@@ -115,7 +117,7 @@ async function API_MUSIC_GET(id) {
 
       cell.colSpan = 3;
       cell.style.display = "table-cell";
-      cell.id = "qwrknhqwq352sd"
+      cell.id = "qwrknhqwq352sd";
 
       /*
        * Create music information line
@@ -157,6 +159,7 @@ async function API_MUSIC_GET(id) {
           return;
         }
 
+        BLOB_LINK_SRC = null;
         lastUrl = url;
 
         AUDIOPLAYER_TITLE.textContent = title;
@@ -186,30 +189,31 @@ async function API_MUSIC_GET(id) {
           });
         }
 
-        document.getElementById("artwork").style.backgroundImage = picture.includes("null")
-          ? `url('./assets/noalbum.svg')`
-          : `url("${new URL(picture, document.baseURI).href}")`;
+        document.getElementById("artwork").style.backgroundImage =
+          picture.includes("null")
+            ? `url('./assets/noalbum.svg')`
+            : `url("${new URL(picture, document.baseURI).href}")`;
 
         fileformat = fileName;
         audio.src = url;
         audio.preload = "auto";
         audio.load();
         audio.play().catch(console.error);
+        audio.playbackRate = window.SPEED_DEF;
 
         try {
-          // Playback uses the original URL; retain the fetched Blob for downloading.
-
           const response = await fetch(url);
           if (!response.ok) {
+            alert(`Track download preparation failed: HTTP ${response.status}`);
             throw new Error(
               `Track download preparation failed: HTTP ${response.status}`,
             );
+          } else {
+            BLOB_LINK_SRC = await response.blob();
+            alert("The download is ready!");
           }
-
-          alert('The download is ready!')
-          BLOB_LINK_SRC = await response.blob();
-          
         } catch (error) {
+          alert(`Unable to prepare the track download: ${error}`);
           console.error("Unable to prepare the track download:", error);
         }
       };
@@ -239,16 +243,16 @@ async function API_MUSIC_GET(id) {
 if (AUDIOPLAYER_DOWNLOAD && musicPlayer) {
   AUDIOPLAYER_DOWNLOAD.addEventListener("click", async () => {
     if (!BLOB_LINK_SRC) {
-      alert('There is no download link yet!')
+      alert("There is no download link yet!");
       return;
-    };
+    }
 
     try {
       const objectUrl = URL.createObjectURL(BLOB_LINK_SRC);
       const link = document.createElement("a");
       link.href = objectUrl;
       link.download = fileformat;
-      alert('Downloading content...')
+      alert("Downloading content...");
       link.click();
     } catch (error) {
       console.error("Unable to download the current track:", error);
@@ -335,7 +339,8 @@ if (musicPlayer) {
       musicPlayer.currentTime = 0;
       musicPlayer.src = "";
       BLOB_LINK_SRC = null;
-      alert('Music stopped.')
+      lastUrl = null;
+      alert("Music stopped.");
     }
   });
 
@@ -392,3 +397,140 @@ window.addEventListener("scroll", API_PLAYER_SCROLL, { passive: true });
 window.addEventListener("resize", API_PLAYER_SCROLL);
 
 API_PLAYER_SCROLL();
+
+// ---------- cubic-bezier solver ----------
+function cubicBezier(x1, y1, x2, y2) {
+  // polynomial coefficients
+  const cx = 3 * x1,
+    bx = 3 * (x2 - x1) - cx,
+    ax = 1 - cx - bx;
+  const cy = 3 * y1,
+    by = 3 * (y2 - y1) - cy,
+    ay = 1 - cy - by;
+
+  const sampleX = (t) => ((ax * t + bx) * t + cx) * t;
+  const sampleY = (t) => ((ay * t + by) * t + cy) * t;
+  const sampleDX = (t) => (3 * ax * t + 2 * bx) * t + cx;
+
+  return (x) => {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+
+    // 1) Newton-Raphson: fast, usually converges in 2-4 steps
+    let t = x;
+    for (let i = 0; i < 8; i++) {
+      const err = sampleX(t) - x;
+      if (Math.abs(err) < 1e-6) return sampleY(t);
+      const d = sampleDX(t);
+      if (Math.abs(d) < 1e-6) break;
+      t -= err / d;
+    }
+
+    // 2) Bisection fallback: always converges
+    let lo = 0,
+      hi = 1,
+      n = 0;
+    t = x;
+    while (lo < hi && n++ < 30) {
+      const xx = sampleX(t);
+      if (Math.abs(xx - x) < 1e-6) break;
+      if (x > xx) lo = t;
+      else hi = t;
+      t = (lo + hi) / 2;
+    }
+    return sampleY(t);
+  };
+}
+
+// ---------- presets ----------
+const EASINGS = {
+  linear: [0, 0, 1, 1],
+  ease: [0.25, 0.1, 0.25, 1], // CSS "ease"
+  cubic: [0.645, 0.045, 0.355, 1], // easeInOutCubic
+  quart: [0.77, 0, 0.175, 1], // easeInOutQuart
+  quint: [0.86, 0, 0.07, 1], // easeInOutQuint
+};
+
+const overshoot = (amount = 1.56) => ({
+  x1: 0.34,
+  y1: amount,
+  x2: 0.64,
+  y2: 1,
+});
+
+const backBoth = (pullback = 0.6, overshoot = 0.6) => ({
+  x1: 0.68,
+  y1: -pullback,
+  x2: 0.32,
+  y2: 1 + overshoot,
+});
+
+// string preset | {x1,y1,x2,y2} | function -> easing function
+function resolveEasing(easing = "ease") {
+  if (typeof easing === "function") return easing;
+
+  if (typeof easing === "string") {
+    const p = EASINGS[easing.trim().toLowerCase()];
+    if (p) return cubicBezier(...p);
+    console.warn(`Unknown easing "${easing}", using "ease"`);
+    return cubicBezier(...EASINGS.ease);
+  }
+
+  if (
+    easing &&
+    ["x1", "y1", "x2", "y2"].every((k) => Number.isFinite(easing[k]))
+  ) {
+    const { x1, y1, x2, y2 } = easing;
+    // x must stay in 0..1 for a valid time -> progress mapping; y may overshoot
+    return cubicBezier(
+      Math.min(1, Math.max(0, x1)),
+      y1,
+      Math.min(1, Math.max(0, x2)),
+      y2,
+    );
+  }
+
+  return cubicBezier(...EASINGS.ease);
+}
+
+// ---------- the glide ----------
+function setPlaybackRateTarget(media, target, duration, easing = "ease") {
+  const ease = resolveEasing(easing);
+  const clamp = (v) => Math.min(16, Math.max(0.0625, v));
+
+  const token = Symbol();
+  media._rateToken = token; // cancels any earlier glide on this element
+
+  const start = media.playbackRate;
+  target = clamp(target);
+  const t0 = performance.now();
+
+  return (async () => {
+    while (media._rateToken === token) {
+      const p =
+        duration <= 0
+          ? 1
+          : Math.min((performance.now() - t0) / (duration * 1000), 1);
+
+      media.playbackRate = clamp(start + (target - start) * ease(p));
+
+      if (p >= 1) break; // lands exactly on target
+      await new Promise(requestAnimationFrame);
+    }
+  })();
+}
+
+const VJDY_SELECTSPEED_OPTION = document.getElementById(
+  "VJDY_SELECTSPEED_OPTION",
+);
+
+if (VJDY_SELECTSPEED_OPTION && musicPlayer) {
+  VJDY_SELECTSPEED_OPTION.addEventListener("change", () => {
+    const val = Number(VJDY_SELECTSPEED_OPTION.value);
+    window.SPEED_DEF = val;
+    if (!Number.isFinite(val)) return;
+
+    setPlaybackRateTarget(musicPlayer, val, 2.5, backBoth(1.5));
+  });
+}
+

@@ -77,6 +77,14 @@ body::after {
   content: "";
   position: fixed;
   top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/bg.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.5;
 }
 
 @media only screen and (max-width: 800px) {
@@ -673,12 +681,27 @@ section {
 
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 24px;
+
+    @media (min-width: 768px) {
+      &[data-order="reverse"] > :first-child {
+        order: 2;
+      }
+
+      &[data-order="reverse"] > :last-child {
+        order: 1;
+      }
+    }
 
     img,
     iframe {
       width: 100%;
       object-fit: cover;
+    }
+
+    img {
+      border: 5px dashed rgba(255, 255, 255, 0.384);
+      padding: 8px;
     }
 
     div {
@@ -843,7 +866,6 @@ section {
 }
 
 footer {
-  background-color: #141414;
   width: 100%;
   margin-top: 48px;
   max-width: var(--limit);
@@ -1022,7 +1044,7 @@ footer {
   align-self: flex-start;
   background-color: #141414;
   border: 2px solid var(--strokecolor);
-  width: 100%;
+  width: calc(100% - 16px);
   margin-bottom: 4px;
   padding: 16px;
   z-index: 50;
@@ -1439,8 +1461,7 @@ input[type="range"] {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  backdrop-filter: invert(1) hue-rotate(180deg);
-  -webkit-backdrop-filter: invert(1) hue-rotate(180deg);
+  border: 4px dashed rgba(255, 255, 255, 0.473);
   pointer-events: none;
   z-index: 2147483647;
   transform: translate(-50%, -50%);
@@ -1448,6 +1469,15 @@ input[type="range"] {
   transition:
     left 0.2s cubic-bezier(0, 0.45, 0.42, 1),
     top 0.2s cubic-bezier(0, 0.45, 0.42, 1);
+}
+
+@keyframes rotation {
+  from {
+    rotate: 0deg;
+  } to {
+    rotate: 360deg;
+  }
+  
 }
 
 .textget {
@@ -1461,4 +1491,15 @@ input[type="range"] {
 code {
   background: #404040;
   padding: 2px 4px;
+}
+
+blockquote {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-left: 2px solid var(--accentcolor-1);
+    padding: 12px;
+    font-family: var(--fontset-sans);
+    color: var(--text);
 }

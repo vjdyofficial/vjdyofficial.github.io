@@ -1,2 +1,2 @@
-# vjdyofficial_site
-website
+# VJDY Official Website
+This repository is intended to run VJDY Website!
