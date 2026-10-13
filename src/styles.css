@@ -4,6 +4,8 @@
   --background: #141414;
   --text: white;
   --footer-layout-direction: column;
+  --footer-tasteofcolors-orientation: column;
+  --footer-tasteofcolors-ratio: 1 / 1;
   --layout-gap: 0px;
   --accentcolor-1: #dfff93;
   --accentcolor-2: hsl(165, 100%, 79%);
@@ -79,7 +81,7 @@ body::after {
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../assets/bg.svg');
+  background-image: url("../assets/bg.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -273,6 +275,32 @@ dialog::backdrop {
   font-size: calc(var(--root) * 1.2);
   padding: calc(var(--root) / 8);
   max-width: var(--limit);
+
+  &::before {
+    content: "/* ";
+    color: #dfff93;
+  }
+
+  &::after {
+    content: " */";
+    color: #dfff93;
+  }
+
+  [data-codedesign="javascript"]&::before {
+    content: "vjdy.expose('";
+    color: #dfff93;
+  }
+
+  [data-codedesign="javascript"]&::after {
+    content: "')";
+    color: #dfff93;
+  }
+}
+
+.MAIN_PAGE_DECORATIVE {
+  position: relative;
+  width: 100%;
+  text-align: left;
 
   &::before {
     content: "/* ";
@@ -604,6 +632,11 @@ nav {
   }
 }
 
+nav[data-type="app"] {
+  position: absolute;
+  top: 0;
+}
+
 button {
   position: relative;
   overflow: hidden;
@@ -843,6 +876,20 @@ section {
   }
 }
 
+@media (min-width: 900px) {
+  :root {
+    --footer-tasteofcolors-orientation: row;
+    --footer-tasteofcolors-ratio: 3 / 4;
+  }
+}
+
+@media (min-width: 1152px) {
+  :root {
+    --footer-tasteofcolors-orientation: row;
+    --footer-tasteofcolors-ratio: 1 / 1;
+  }
+}
+
 @media (min-width: 1440px) {
   .MNS_AREA_2 {
     grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -866,9 +913,10 @@ section {
 }
 
 footer {
+  bottom: 8px;
   width: 100%;
-  margin-top: 48px;
   max-width: var(--limit);
+  margin-top: 48px;
   margin-bottom: 4px;
   padding: 16px;
   display: flex;
@@ -1198,16 +1246,18 @@ input[type="range"] {
   border-radius: 0px;
   height: 4px;
 
+  accent-color: white;
   background: #363636;
 
   /* Used to be background color, the track */
   background-image: linear-gradient(#fff, #fff);
 
   /* 30% is the difference between the max and the current value (100 - 70) */
-  background-size: 30% 100%;
+  background-size: 0% 100%;
   background-repeat: no-repeat;
 
   &::-webkit-scrollbar-track {
+    position: relative;
     height: 2px;
   }
 
@@ -1466,18 +1516,15 @@ input[type="range"] {
   z-index: 2147483647;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition:
-    left 0.2s cubic-bezier(0, 0.45, 0.42, 1),
-    top 0.2s cubic-bezier(0, 0.45, 0.42, 1);
 }
 
 @keyframes rotation {
   from {
     rotate: 0deg;
-  } to {
+  }
+  to {
     rotate: 360deg;
   }
-  
 }
 
 .textget {
@@ -1494,12 +1541,139 @@ code {
 }
 
 blockquote {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    margin-left: 0px;
-    margin-right: 0px;
-    border-left: 2px solid var(--accentcolor-1);
-    padding: 12px;
-    font-family: var(--fontset-sans);
-    color: var(--text);
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 0px;
+  margin-right: 0px;
+  border-left: 2px solid var(--accentcolor-1);
+  padding: 12px;
+  font-family: var(--fontset-sans);
+  color: var(--text);
+}
+
+.tasteofcolors_app_container {
+  position: absolute;
+  top: 90px;
+  padding: 24px;
+  display: flex;
+  height: calc(100dvh - 100px);
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  overflow: hidden;
+  overflow-y: scroll;
+  flex-direction: var(--footer-tasteofcolors-orientation);
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .FFBEDF2242 {
+    position: sticky;
+    top: 0px;
+    width: 500px;
+
+    @media (max-width: 899px) {
+      width: 100%;
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    padding: 24px;
+
+    border: 3px dashed #ffffff40;
+
+    img {
+      object-fit: contain;
+    }
+
+    .DFER2143 {
+      display: none;
+    }
+  }
+
+  .FFBEDF2242:has(img[src=""]) {
+    .DFER2143 {
+      width: 100%;
+      aspect-ratio: var(--footer-tasteofcolors-ratio);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      z-index: -1;
+    }
+  }
+
+  .DFFEF34435 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ffffff40;
+
+    #TASTEOFCOLORS_TABLECOLORS {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      table-layout: fixed;
+
+      @media (max-width: 1280px) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      @media (max-width: 600px) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .SWATCH {
+        width: 100%;
+        height: 100%;
+        padding: 8px;
+
+        .SWATCH_TITLE {
+          width: 100%;
+          font-size: 14px;
+          font-weight: bold;
+          text-align: left;
+        }
+        .SWATCH_HEXCODE {
+          width: 100%;
+          font-weight: bold;
+          font-family: var(--fontset-mono);
+          font-size: 12px;
+          text-align: left;
+        }
+        .SWATCH_CMYK {
+          width: 100%;
+          font-family: var(--fontset-mono);
+          font-size: 12px;
+          text-align: left;
+        }
+      }
+    }
+
+    h3 {
+      padding: 8px 12px;
+    }
+
+    span {
+      width: 100%;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+
+      label {
+        width: 125px;
+      }
+
+      input[type="range"] {
+        width: 100%;
+      }
+
+      output {
+        width: 125px;
+      }
+    }
+  }
 }

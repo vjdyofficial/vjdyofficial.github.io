@@ -114,3 +114,6 @@ document.addEventListener("pointerleave", () => {
   highlightCursor.style.opacity = "0";
 });
 
+function expose(parameter, object) {
+  window[parameter] = object;
+}

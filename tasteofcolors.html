@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <link rel="stylesheet" href="./src/fonts.css" title="Fonts" />
+
+    <script src="./src/core.js" defer></script>
+    <script src="/tasteofcolors.js" type="module"></script>
+    <link rel="icon" href="./favicon.ico" />
+    <title>Taste of Colors</title>
+  </head>
+
+  <body>
+    <nav data-type="app">
+      <div class="nav_layout">
+        <span>
+          <button
+            type="button"
+            class="back-button"
+            onclick="
+              history.length > 1
+                ? history.back()
+                : (window.location.href = window.location.origin)
+            ">
+            <img
+              src="./assets/icons/arrow_back.svg"
+              class="tint"
+              alt="Instagram" />
+          </button>
+          <img
+            alt="Logo"
+            src="./assets/logo/tasteofcolors.svg"
+            height="40px"
+            style="cursor: pointer; -webkit-user-drag: auto"
+            onclick="window.location.href = window.location.origin" />
+        </span>
+      </div>
+    </nav>
+    <main class="tasteofcolors_app_container">
+      <div class="FFBEDF2242">
+        <img
+          width="100%"
+          height="100%"
+          src=""
+          hidden
+          id="TASTEOFCOLORS_IMPORTEDIMAGE" />
+        <div class="DFER2143" id="TASTEOFCOLORS_IMPORTCONTAINER" src="">
+          <img src="/assets/icons/add.svg" width="96px" class="tint" />
+          <small>Import File</small>
+        </div>
+      </div>
+      <div class="DFFEF34435">
+        <h3 class="MAIN_PAGE_DECORATIVE">Properties</h3>
+        <span>
+          <label>Seed</label>
+          <input
+            type="range"
+            min="0"
+            max="64"
+            value="0"
+            id="TASTEOFCOLORS_RANSOMSEED" />
+          <output id="TASTEOFCOLORS_RANSOMSEED_TEXT">0</output>
+        </span>
+
+        <span>
+          <label>Pallete</label>
+          <input
+            type="range"
+            min="50"
+            max="200"
+            value="50"
+            id="TASTEOFCOLORS_COLORPALLETES" />
+          <output id="TASTEOFCOLORS_COLORPALLETES_TEXT">45</output>
+        </span>
+
+        
+        <span>
+          <button id="TASTEOFCOLORS_EXPORT">Export</button>
+          <button id="TASTEOFCOLORS_IMPORTREMOVE">Remove</button>
+        </span>
+        <div id="TASTEOFCOLORS_TABLECOLORS"></div>
+      </div>
+    </main>
+  </body>
+</html>
