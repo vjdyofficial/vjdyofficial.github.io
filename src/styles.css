@@ -1572,6 +1572,7 @@ blockquote {
     width: 500px;
 
     @media (max-width: 899px) {
+      position: relative;
       width: 100%;
       min-height: 0;
       aspect-ratio: 4 / 3;
