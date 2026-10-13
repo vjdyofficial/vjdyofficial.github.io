@@ -90,8 +90,20 @@ body::after {
 }
 
 @media only screen and (max-width: 800px) {
-  body {
+  html {
     zoom: 0.85;
+  }
+
+  .tasteofcolors_app_container {
+    zoom: 1.18;
+
+    .FFBEDF2242, .DFFEF34435 {
+      zoom: 0.85;
+    }
+  }
+
+  .cursor {
+    zoom: 1.18;
   }
 }
 
@@ -1573,8 +1585,8 @@ blockquote {
 
     @media (max-width: 899px) {
       position: relative;
+      height: 50%;
       width: 100%;
-      min-height: 0;
       aspect-ratio: 4 / 3;
     }
 
@@ -1613,6 +1625,7 @@ blockquote {
     border: 1px solid #ffffff40;
 
     #TASTEOFCOLORS_TABLECOLORS {
+      width: 100%;
       display: grid;
       grid-template-columns: repeat(8, minmax(0, 1fr));
       table-layout: fixed;
