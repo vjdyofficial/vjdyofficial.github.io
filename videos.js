@@ -73,7 +73,17 @@ const loadVideos = () => {
         /*
          * GitHub Release video URL
          */
-        const videoURL = encodeURIComponent(String(video.file));
+        const videoURL =
+          "https://github.com/vjdyofficial/vjdyofficial/releases/download/" +
+          encodeURIComponent(String(video.releasetag)) +
+          "/" +
+          encodeURIComponent(String(video.file));
+
+        const streamURL =
+          "https://github.com/vjdyofficial/vjdyofficial/releases/download/" +
+          encodeURIComponent(String(video.releasetag)) +
+          "/" +
+          encodeURIComponent(String(video.stream));
 
         /*
          * STREAM button
@@ -83,7 +93,10 @@ const loadVideos = () => {
         streamButton.className = "back-button";
 
         streamButton.href =
-          "./player.html?src=" + encodeURIComponent(videoURL);
+          "./player.html?src=" +
+          (video.stream
+            ? encodeURIComponent(streamURL)
+            : encodeURIComponent(videoURL));
 
         streamButton.target = "_blank";
 
