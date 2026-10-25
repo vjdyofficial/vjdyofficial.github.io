@@ -48,6 +48,12 @@
 		"date": "January 4 2026"
 	},
 	{
+		"title": "UCCP 111th Anniversary Recap 2026",
+		"file": "api/videos/111th_anniv_stream.webm",
+        "releasetag": "uccpnaga-videos",
+		"date": "May 3 2026"
+	},
+	{
 		"title": "UCCP Naga VCS 2026",
 		"file": "lv_0_20260503091351-2.mp4",
         "releasetag": "uccpnaga-sde",

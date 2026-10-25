@@ -45,7 +45,7 @@ const loadVideos = () => {
       videos.forEach((video) => {
         const row = tableBody.insertRow();
         const cell = row.insertCell();
-        cell.id = "qwrknhqwq352sd"
+        cell.id = "qwrknhqwq352sd";
 
         // Movie icon
         const icon = document.createElement("img");
@@ -73,11 +73,7 @@ const loadVideos = () => {
         /*
          * GitHub Release video URL
          */
-        const videoURL =
-          "https://github.com/vjdyofficial/vjdyofficial/releases/download/" +
-          encodeURIComponent(String(video.releasetag)) +
-          "/" +
-          encodeURIComponent(String(video.file));
+        const videoURL = encodeURIComponent(String(video.file));
 
         /*
          * STREAM button
@@ -86,12 +82,13 @@ const loadVideos = () => {
 
         streamButton.className = "back-button";
 
-        streamButton.href = "./player.html?src=" + encodeURIComponent(videoURL);
+        streamButton.href =
+          "./player.html?src=" + encodeURIComponent(videoURL);
 
         streamButton.target = "_blank";
 
         streamButton.rel = "noopener noreferrer";
-        streamButton.title = "Stream Video"
+        streamButton.title = "Stream Video";
 
         streamButton.innerHTML = `
           <img
@@ -120,7 +117,7 @@ const loadVideos = () => {
         downloadButton.target = "_blank";
 
         downloadButton.rel = "noopener noreferrer";
-        downloadButton.title = "Download Video"
+        downloadButton.title = "Download Video";
 
         downloadButton.innerHTML = `
           <img

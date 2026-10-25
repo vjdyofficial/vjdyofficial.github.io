@@ -111,6 +111,8 @@
             controls
             playsinline
             preload="metadata"
+            controlsList="nodownload"
+            oncontextmenu="return false;"
         ></video>
 
         <div
@@ -136,6 +138,8 @@
         const errorMessage =
             document.getElementById("errorMessage");
 
+        let blobURL = null;
+
 
         /*
          * Get the video URL from:
@@ -159,14 +163,9 @@
 
             try {
 
-                /*
-                 * Decode the URL if necessary.
-                 */
-                const decodedURL =
-                    decodeURIComponent(videoURL);
-
-                videoPlayer.src = decodedURL;
-
+                // Load the media directly so JavaScript does not make a
+                // cross-origin fetch that requires CORS response headers.
+                videoPlayer.src = videoURL;
                 videoPlayer.load();
 
             } catch (error) {
@@ -212,6 +211,17 @@
 
                 document.title =
                     "VJDY Video Player";
+            }
+        );
+
+
+        window.addEventListener(
+            "beforeunload",
+            () => {
+
+                if (blobURL) {
+                    URL.revokeObjectURL(blobURL);
+                }
             }
         );
 
