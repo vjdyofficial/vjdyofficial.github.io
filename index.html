@@ -220,6 +220,11 @@
           </button>
         </div>
       </div>
+    </main>
+
+    <h1 class="MAIN_PAGE_HEADLINE">Our Apps</h1>
+
+    <main class="portfolio">
       <div class="info_main">
         <img alt="Icon" src="./assets/pageicons/12.svg" width="48px" />
         <div class="info_sub">
@@ -289,8 +294,11 @@
     <h1 class="MAIN_PAGE_HEADLINE">About Me</h1>
     <main>
       <section>
-        <div class="article_layout">
-          <img alt="thee logo" src="../assets/about.jpg" />
+        <div
+          class="article_layout"
+          data-overlaytext="true"
+          data-overlaytext-content="My info and my skill">
+          <img alt="thee logo" src="/assets/index_me.jpg" />
           <div>
             <h1 class="MAIN_PAGE_HEADLINE">My info</h1>
             <p>
@@ -323,7 +331,7 @@
     <main>
       <section>
         <div class="article_layout" data-order="reverse">
-          <img alt="thee logo" src="../assets/about_mybff.png" />
+          <img alt="thee logo" src="/assets/index_mybff.jpg" />
           <div>
             <h1 class="MAIN_PAGE_HEADLINE">Her info</h1>
             <blockquote>
@@ -431,20 +439,33 @@
     </footer>
 
     <script>
-      window.EASTEREGG = ""
+      window.EASTEREGG = "";
+      const EGG_SECRET = [
+        107, 105, 109, 97, 108, 101, 99, 122, 97, 110, 100, 114, 97,
+      ]
+        .map((code) => String.fromCharCode(code))
+        .join("");
 
       document.addEventListener("keydown", (e) => {
-          if (e.key === "Backspace") {
-            window.EASTEREGG = ""
-          } else {
-            window.EASTEREGG = window.EASTEREGG + e.key
+        const key = e.key && e.key.length === 1 ? e.key.toLowerCase() : "";
 
-            if (window.EASTEREGG === "kimaleczandra") {
-              window.alert("You found my bff easter egg! :-)");
-              window.EASTEREGG = ""
-            }
-          }
-      })
+        if (e.key === "Backspace") {
+          window.EASTEREGG = "";
+          return;
+        }
+
+        if (!key) return;
+
+        window.EASTEREGG = window.EASTEREGG + key;
+
+        if (window.EASTEREGG === EGG_SECRET) {
+          const eggAudio = new Audio("/api/egg.wav");
+          eggAudio.volume = 1;
+          eggAudio.play().catch(() => {});
+          window.alert("You found my bff easter egg! :-)");
+          window.EASTEREGG = "";
+        }
+      });
     </script>
   </body>
 </html>

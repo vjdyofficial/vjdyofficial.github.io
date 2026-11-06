@@ -51,11 +51,42 @@ function createPreviewDialog(imageSrc, item) {
   dialog.showModal();
 }
 
+function resizeImageToSquare(src, size = 512) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Canvas 2D context not available."));
+        return;
+      }
+
+      const scale = Math.max(size / img.naturalWidth, size / img.naturalHeight);
+      const width = img.naturalWidth * scale;
+      const height = img.naturalHeight * scale;
+      const x = (size - width) / 2;
+      const y = (size - height) / 2;
+
+      ctx.clearRect(0, 0, size, size);
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(img, x, y, width, height);
+
+      resolve(canvas.toDataURL("image/png"));
+    };
+    img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+    img.src = src;
+  });
+}
+
 async function API_MOMENT_GET() {
   const items = await fetch("./moments.json").then((res) => res.json());
   const parent = document.getElementById("moments_parent");
 
-  items.forEach((item) => {
+  items.forEach(async (item) => {
     const moment = document.createElement("div");
     moment.className = "moments_main";
     moment.addEventListener("click", () => {
@@ -63,8 +94,18 @@ async function API_MOMENT_GET() {
     });
 
     const image = document.createElement("img");
-    image.src = "./api/moments/" + item.image;
     image.className = "moments_image";
+    image.alt = item.title || "Moment";
+
+    const imageSrc = "./api/moments/" + item.image;
+    resizeImageToSquare(imageSrc)
+      .then((resizedSrc) => {
+        image.src = resizedSrc;
+      })
+      .catch(() => {
+        image.src = imageSrc;
+      });
+
     moment.appendChild(image);
 
     const info = document.createElement("div");

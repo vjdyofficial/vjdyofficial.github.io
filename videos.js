@@ -19,11 +19,9 @@ function API_SEARCH(query) {
 }
 
 const loadVideos = () => {
-  const table = document.getElementById("tablex");
+  const parent = document.getElementById("tablex_video");
 
-  if (!table) return;
-
-  const tableBody = table.tBodies[0] || table.createTBody();
+  if (!parent) return;
 
   fetch("./videos.json")
     .then((response) => {
@@ -40,35 +38,44 @@ const loadVideos = () => {
         throw new Error("videos.json must contain an array");
       }
 
-      tableBody.replaceChildren();
+      parent.replaceChildren();
 
       videos.forEach((video) => {
-        const row = tableBody.insertRow();
-        const cell = row.insertCell();
-        cell.id = "qwrknhqwq352sd";
+        const moment = document.createElement("div");
+        moment.className = "moments_main";
 
-        // Movie icon
         const icon = document.createElement("img");
-
-        icon.src = "./assets/icons/movie.svg";
+        icon.src = video.image ?? "./assets/icons/movie.svg";
+        icon.className = "moments_image";
+        icon.setAttribute("data-type", "video");
         icon.width = 18;
-        icon.className = "tint";
         icon.alt = "";
+        moment.appendChild(icon);
 
-        cell.append(icon);
+        const info = document.createElement("div");
+        info.className = "moments_info";
 
-        // Video information
-        const span = document.createElement("span");
+        const title = document.createElement("h3");
+        title.id = "moments_title";
+        title.title = video.title ?? "";
+        title.textContent = video.title ?? "";
+        
+        info.appendChild(title);
 
-        [video.title, video.releasetag, video.date].forEach((value) => {
-          const text = document.createElement("p");
+        const description = document.createElement("small");
+        description.id = "moments_desc";
+        description.title = [video.releasetag, video.date]
+          .filter(Boolean)
+          .join(" • ");
+        description.innerHTML = [video.releasetag, video.date]
+          .filter(Boolean)
+          .join(" • ");
+        info.appendChild(description);
 
-          text.textContent = value ?? "";
+        moment.appendChild(info);
 
-          span.append(text);
-        });
-
-        cell.append(span);
+        const actions = document.createElement("div");
+        actions.className = "moments_actions";
 
         /*
          * GitHub Release video URL
@@ -79,73 +86,33 @@ const loadVideos = () => {
           "/" +
           encodeURIComponent(String(video.file));
 
-        const streamURL =
-          "https://github.com/vjdyofficial/vjdyofficial/releases/download/" +
-          encodeURIComponent(String(video.releasetag)) +
-          "/" +
-          encodeURIComponent(String(video.stream));
+        const streamURL = video.stream;
 
-        /*
-         * STREAM button
-         */
-        const streamButton = document.createElement("a");
+        if (streamURL) {
+          const streamButton = document.createElement("a");
+          streamButton.className = "back-button";
+          streamButton.href = streamURL;
+          streamButton.target = "_blank";
+          streamButton.rel = "noopener noreferrer";
+          streamButton.title = "Stream Video";
+          streamButton.innerHTML = `
+            <img
+              src="./assets/icons/play_arrow.svg"
+              class="tint"
+              alt=""
+            />
+            <span>Stream</span>
+          `;
+          streamButton.setAttribute(
+            "aria-label",
+            `Stream ${video.title ?? "video"}`,
+          );
 
-        streamButton.className = "back-button";
+          actions.appendChild(streamButton);
+        }
 
-        streamButton.href =
-          "./player.html?src=" +
-          (video.stream
-            ? encodeURIComponent(streamURL)
-            : encodeURIComponent(videoURL));
-
-        streamButton.target = "_blank";
-
-        streamButton.rel = "noopener noreferrer";
-        streamButton.title = "Stream Video";
-
-        streamButton.innerHTML = `
-          <img
-            src="./assets/icons/play_arrow.svg"
-            class="tint"
-            alt=""
-          />
-        `;
-
-        streamButton.setAttribute(
-          "aria-label",
-          `Stream ${video.title ?? "video"}`,
-        );
-
-        cell.append(streamButton);
-
-        /*
-         * DOWNLOAD button
-         */
-        const downloadButton = document.createElement("a");
-
-        downloadButton.className = "back-button";
-
-        downloadButton.href = videoURL;
-
-        downloadButton.target = "_blank";
-
-        downloadButton.rel = "noopener noreferrer";
-        downloadButton.title = "Download Video";
-
-        downloadButton.innerHTML = `
-          <img
-            src="./assets/icons/download.svg"
-            class="tint"
-            alt=""
-          />
-        `;
-
-        downloadButton.setAttribute(
-          "aria-label",
-          `Download ${video.title ?? "video"}`,
-        );
-
-        cell.append(downloadButton);
+        moment.appendChild(actions);
+        parent.appendChild(moment);
       });
     })
     .catch((error) => {

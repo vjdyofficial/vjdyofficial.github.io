@@ -35,6 +35,13 @@
     "picture": "artwork-2026/Apartment Theme Remix.webp"
   },
   {
+    "title": "Barayti Retro",
+    "artist": "vjdyofficial",
+    "album": "Radyo Barayti on VJDY FM - Official Theme Song",
+    "file": "Barayti Retro.mp3",
+    "picture": "artwork-2026/Barayti Retro.webp"
+  },
+  {
     "title": "Beach O'rama",
     "artist": "vjdyofficial",
     "album": "kimaleczandra, the internet savvy Series 2",
@@ -99,10 +106,10 @@
   },
   {
     "title": "Chill Jazz",
-    "artist": "",
-    "album": "",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
     "file": "Chill Jazz.mp3",
-    "picture": null
+    "picture": "artwork-2026/Chill Jazz.webp"
   },
   {
     "title": "Coconuts",
@@ -127,17 +134,17 @@
   },
   {
     "title": "Country Road",
-    "artist": "",
-    "album": "",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
     "file": "Country Road.mp3",
-    "picture": null
+    "picture": "artwork-2026/Country Road.webp"
   },
   {
     "title": "Dancefloor",
-    "artist": "",
-    "album": "",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
     "file": "Dancefloor.mp3",
-    "picture": null
+    "picture": "artwork-2026/Dancefloor.webp"
   },
   {
     "title": "DeLora X Power Theme Intro 2026",
@@ -159,6 +166,20 @@
     "album": "DeLora X Power - Biggest Milestone",
     "file": "DeLora X Power Theme Song 2026.mp3",
     "picture": "artwork-2026/DeLora X Power Theme Song 2026.webp"
+  },
+  {
+    "title": "Direct Relaxation",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
+    "file": "Direct Relaxation.mp3",
+    "picture": "artwork-2026/Direct Relaxation.webp"
+  },
+  {
+    "title": "Direct Showcase",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
+    "file": "Direct Showcase.mp3",
+    "picture": "artwork-2026/Direct Showcase.webp"
   },
   {
     "title": "Discussion Savvy Afrobeat",
@@ -301,6 +322,13 @@
     "picture": "artwork-2026/Night Routine.webp"
   },
   {
+    "title": "Nightly Event",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
+    "file": "Nightly Event.mp3",
+    "picture": "artwork-2026/Nightly Event.webp"
+  },
+  {
     "title": "Oh my Darling Ah Girl (Instrumental)",
     "artist": "vjdyofficial, [RL] David",
     "album": "Oh, my darling ah girl. by vjdyofficial",
@@ -313,6 +341,13 @@
     "album": "Oh, my darling ah girl. by vjdyofficial",
     "file": "Oh my Darling Ah Girl.mp3",
     "picture": "artwork-2026/Oh my Darling Ah Girl.webp"
+  },
+  {
+    "title": "On the Spot",
+    "artist": "vjdyofficial, m3gatron",
+    "album": "VJDY Direct - Official Soundtrack",
+    "file": "On the Spot.mp3",
+    "picture": "artwork-2026/On the Spot.webp"
   },
   {
     "title": "Overture So Fun",
@@ -350,11 +385,25 @@
     "picture": "artwork-2026/Popstar.webp"
   },
   {
-    "title": "Radyo Barayti Ending and Commercial Song",
+    "title": "Radyo Barayti - Score Cumbia Dos",
     "artist": "vjdyofficial",
     "album": "Radyo Barayti on VJDY FM - Official Theme Song",
-    "file": "Radyo Barayti Ending and Commercial Song.mp3",
-    "picture": "artwork-2026/Radyo Barayti Ending and Commercial Song.webp"
+    "file": "Radyo Barayti - Score Cumbia Dos.mp3",
+    "picture": "artwork-2026/Radyo Barayti - Score Cumbia Dos.webp"
+  },
+  {
+    "title": "Radyo Barayti - Score Cumbia Uno",
+    "artist": "vjdyofficial",
+    "album": "Radyo Barayti on VJDY FM - Official Theme Song",
+    "file": "Radyo Barayti - Score Cumbia Uno.mp3",
+    "picture": "artwork-2026/Radyo Barayti - Score Cumbia Uno.webp"
+  },
+  {
+    "title": "Radyo Barayti Theme Song (Instrumental)",
+    "artist": "vjdyofficial",
+    "album": "Radyo Barayti on VJDY FM - Official Theme Song",
+    "file": "Radyo Barayti Theme Song (Instrumental).mp3",
+    "picture": "artwork-2026/Radyo Barayti Theme Song (Instrumental).webp"
   },
   {
     "title": "Radyo Barayti Theme Song",
@@ -530,6 +579,27 @@
     "album": "VJDY Official Direct - Official Score Soundtrack",
     "file": "VIsibility.mp3",
     "picture": "artwork-2026/VIsibility.webp"
+  },
+  {
+    "title": "VJDY Direct Theme Intro",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
+    "file": "VJDY Direct Theme Intro.mp3",
+    "picture": "artwork-2026/VJDY Direct Theme Intro.webp"
+  },
+  {
+    "title": "VJDY Direct Theme Music",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
+    "file": "VJDY Direct Theme Music.mp3",
+    "picture": "artwork-2026/VJDY Direct Theme Music.webp"
+  },
+  {
+    "title": "VJDY Direct Theme Short",
+    "artist": "vjdyofficial",
+    "album": "VJDY Direct - Official Soundtrack",
+    "file": "VJDY Direct Theme Short.mp3",
+    "picture": "artwork-2026/VJDY Direct Theme Short.webp"
   },
   {
     "title": "What do you mean Background",

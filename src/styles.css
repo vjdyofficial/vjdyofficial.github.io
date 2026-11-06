@@ -97,7 +97,8 @@ body::after {
   .tasteofcolors_app_container {
     zoom: 1.18;
 
-    .FFBEDF2242, .DFFEF34435 {
+    .FFBEDF2242,
+    .DFFEF34435 {
       zoom: 0.85;
     }
   }
@@ -403,13 +404,22 @@ dialog::backdrop {
   }
 }
 
-#moments_parent {
+#moments_parent,
+#tablex_video,
+#tablex_music {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   height: 100%;
   padding: 8px;
   gap: 8px;
+}
+
+.moments_actions {
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  width: 100%;
 }
 
 #music_parent {
@@ -539,6 +549,8 @@ dialog::backdrop {
 
 @media (min-width: 320px) {
   #moments_parent,
+  #tablex_video,
+  #tablex_music,
   #music_parent {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -546,6 +558,8 @@ dialog::backdrop {
 
 @media (min-width: 720px) {
   #moments_parent,
+  #tablex_video,
+  #tablex_music,
   #music_parent {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -553,6 +567,8 @@ dialog::backdrop {
 
 @media (min-width: 1280px) {
   #moments_parent,
+  #tablex_video,
+  #tablex_music,
   #music_parent {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
@@ -600,7 +616,7 @@ dialog::backdrop {
 }
 
 nav {
-  --root: #24242480;
+  --root: #242424bb;
   position: sticky;
   top: 0;
   background-color: var(--root);
@@ -984,6 +1000,11 @@ footer {
 .moments_main {
   border: 1.5px solid var(--strokecolor);
   background-color: #242424;
+  position: relative;
+
+  &[data-hasbutton="true"] {
+    padding-bottom: calc(32px + 8px);
+  }
 
   .moments_image {
     aspect-ratio: 1 / 1;
@@ -996,10 +1017,42 @@ footer {
     object-fit: cover;
   }
 
+  .moments_image[data-type="video"] {
+    aspect-ratio: 16 / 9;
+  }
+
+  .moments_download {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: flex;
+    height: 32px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
+    color: "#fff";
+    cursor: "pointer";
+
+    small {
+      font-size: 12px;
+      opacity: 0.5;
+      text-transform: uppercase;
+    }
+  }
+
   .moments_info {
     padding: 8px;
 
-    h2 {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
